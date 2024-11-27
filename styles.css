@@ -57,6 +57,9 @@ h2 {
   border-radius: 10px;
 }
 
+hr {
+  margin: 50px 0;
+}
 /* Media query for mobile devices */
 @media (max-width: 700px) {
   body {
