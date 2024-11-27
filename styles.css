@@ -56,3 +56,24 @@ h2 {
   align-items: center; */
   border-radius: 10px;
 }
+
+/* Media query for mobile devices */
+@media (max-width: 700px) {
+  body {
+    font-size: 14px; /* Reduce font size for mobile devices */
+  }
+
+  .main-content {
+    padding: 0 20px 20px 20px; /* Adjust padding for mobile devices */
+  }
+
+  nav ul li {
+    display: block; /* Change to block for vertical list */
+    margin: 10px 0; /* Adjust margin for spacing */
+  }
+
+  nav ul li a {
+    display: block; /* Ensure links take full width */
+    text-align: center; /* Center align text */
+  }
+}
