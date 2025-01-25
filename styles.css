@@ -32,27 +32,23 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-  color: #ebf5ff;
+  color: #b7b7b7;
+}
+
+h2 {
+  padding: 50px 0 0 0;
 }
 
 .main-content {
   padding: 0 100px 100px 100px;
 }
 
-h2 {
-  padding: 50px 0 0 0;
-}
-.greeting-message {
-  /* margin-bottom: 20px; */
-  /* padding: 20px; */
-  padding-bottom: 20px;
-  /* border-radius: 10px; */
+.language-content .greeting-message,
+.language-content .greeting-message-fr {
+  margin-bottom: 75px;
 }
 
 .constitution {
-  /* display: flex;
-  flex-direction: column;
-  align-items: center; */
   border-radius: 10px;
 }
 
@@ -78,4 +74,31 @@ hr {
     display: block; /* Ensure links take full width */
     text-align: center; /* Center align text */
   }
+}
+
+.nav-language-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav {
+  flex-grow: 1;
+  text-align: center;
+  margin-left: 350px;
+}
+
+#language-toggle {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: color 0.3s ease, background-color 0.3s ease;
+  margin-right: 350px;
+  font-family: inherit;
+  font-weight: 700;
+}
+
+#language-toggle:hover {
+  color: #b7b7b7;
 }
