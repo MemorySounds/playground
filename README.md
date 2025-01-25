@@ -1,6 +1,6 @@
 # Playground Sessions
 
-A very basic website (vanilla JS, HTML, CSS) to host the content of the PLAYGROUND sessions. It's an evolving project with plenty of experimentation, so please expect short-cuts; the use-case isn't very formal and nor does it need to be very strict.
+A very basic website (vanilla JS, HTML, CSS) to host the content of the PLAYGROUND sessions. It's an evolving project with plenty of experimentation, so please expect short-cuts; the use-case isn't very formal nor does it need to be very strict.
 
 ## How to Develop Locally
 
