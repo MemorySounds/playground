@@ -1,6 +1,6 @@
 # Playground Sessions
 
-A very basic website (vanilla JS, HTML, CSS) to host the content of the PLAYGROUND sessions. It's an evolving project with plenty of experimentation, so please expect short-cuts; the use-case isn't very formal nor does it need to be very strict.
+A very basic website (vanilla JS, HTML, CSS) to host the content of the PLAYGROUND sessions. It's an evolving project with plenty of experimentation, so please expect short-cuts; the use-case isn't very formal so does it need to be very strict.
 
 ## How to Develop Locally
 
@@ -35,7 +35,7 @@ After setting up a local environment.
 git checkout -b feature-branch
 ```
 
-Not following any strict naming conventions here, it's a very small project so just make it something relevant to what the feature will be about. It can be useful, if the branch relates to an Github issue, to reference that issue + the number of the issue in the branch name.
+This project isn't following any strict naming conventions, it's a very small project, so just make it something relevant to what the feature will be about. It can be useful, if the branch relates to an Github issue, to reference that issue + the number of the issue in the branch name.
 
 e.g. `1-language-switch`
 
