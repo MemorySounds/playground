@@ -4,24 +4,31 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PLAYGROUND</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Indie+Flower&family=Permanent+Marker&family=Shadows+Into+Light&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="styles.css" />
     <script src="scripts.js"></script>
   </head>
   <body>
     <header>
-      <h1>Welcome to PLAYGROUND make some changes</h1>
-      <nav>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="presentation.html">Presentation</a></li>
-          <li><a href="index.html">Logistics</a></li>
-          <li><a href="index.html">Archive</a></li>
-          <li><a href="index.html">Contact</a></li>
-        </ul>
-      </nav>
+      <h1>Welcome to PLAYGROUND</h1>
+      <div class="nav-language-wrapper">
+        <nav>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="presentation.html">Presentation</a></li>
+            <li><a href="references.html">References</a></li>
+            <li><a href="archive.html">Archive</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </nav>
+        <button id="language-toggle">FR</button>
+      </div>
     </header>
     <main class="main-content">
-      <div>
+      <div id="content-fr" class="language-content">
         <div class="greeting-message-fr">
           <p><b>En français</b></p>
           <p>Chers amis,</p>
@@ -34,21 +41,6 @@
             toujours évident d’expliquer ce que nous faisons. Ce site web est
             une tentative de le définir, tout en préservant les zones
             d’incertitudes inhérentes à toute pratique expérimentale.
-          </p>
-        </div>
-        <br />
-        <p class="language-label"><b>English Version</b></p>
-        <div class="greeting-message">
-          <p>Dear friends,</p>
-          <p>
-            You’re here because you came to, will come to or are simply
-            interested in PLAYGROUND sessions.
-          </p>
-          <p>
-            As we are groping our way through our own artistic research, it is
-            not always easy to explain what we do. This website is an attempt to
-            define it, while preserving the areas of uncertainty inherent in any
-            experimental practice.
           </p>
         </div>
         <div class="constitution">
@@ -73,7 +65,24 @@
             <li>PLAYGROUND est une quête d’authenticité</li>
             <li>PLAYGROUND est un désir de faire collectif</li>
           </ul>
-          <br />
+        </div>
+      </div>
+      <div id="content-en" class="language-content">
+        <div class="greeting-message">
+          <p><b>English Version</b></p>
+          <p>Dear friends,</p>
+          <p>
+            You’re here because you came to, will come to or are simply
+            interested in PLAYGROUND sessions.
+          </p>
+          <p>
+            As we are groping our way through our own artistic research, it is
+            not always easy to explain what we do. This website is an attempt to
+            define it, while preserving the areas of uncertainty inherent in any
+            experimental practice.
+          </p>
+        </div>
+        <div class="constitution">
           <ul>
             <li><strong>0/ CONSTITUTION</strong></li>
             <li>PLAYGROUND is an art experiment</li>
@@ -87,8 +96,9 @@
             <li>PLAYGROUND is where you listen to your inner state</li>
             <li>PLAYGROUND is an ephemeral space built by its participants</li>
             <li>PLAYGROUND is unpredictable but organic</li>
-            <li>PLAYGROUND is a structureless game</li>
+            <li>PLAYGROUND is a game with blurred rules</li>
             <li>PLAYGROUND is an absurd situation</li>
+            <li>PLAYGROUND is not taking it seriously</li>
             <li>PLAYGROUND is a quest for authenticity</li>
             <li>PLAYGROUND is a desire for collective actions</li>
           </ul>
