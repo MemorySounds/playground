@@ -1,9 +1,9 @@
 const routes = {
-  "#/": "/pages/home.html",
-  "#/presentation": "/pages/presentation.html",
-  "#/references": "/pages/references.html",
-  "#/archive": "/pages/archive.html",
-  "#/contact": "/pages/contact.html"
+  "#/": "pages/home.html",
+  "#/presentation": "pages/presentation.html",
+  "#/references": "pages/references.html",
+  "#/archive": "pages/archive.html",
+  "#/contact": "pages/contact.html"
 };
 
 async function loadPage(hash) {
