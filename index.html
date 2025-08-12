@@ -1,109 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PLAYGROUND</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Indie+Flower&family=Permanent+Marker&family=Shadows+Into+Light&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="styles.css" />
-    <script src="scripts.js"></script>
-  </head>
-  <body>
-    <header>
-      <h1>Welcome to PLAYGROUND</h1>
-      <div class="nav-language-wrapper">
-        <nav>
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="presentation.html">Presentation</a></li>
-            <li><a href="references.html">References</a></li>
-            <li><a href="archive.html">Archive</a></li>
-            <li><a href="contact.html">Contact</a></li>
-          </ul>
-        </nav>
-        <button id="language-toggle">FR</button>
-      </div>
-    </header>
-    <main class="main-content">
-      <div id="content-fr" class="language-content">
-        <div class="greeting-message-fr">
-          <p><b>En français</b></p>
-          <p>Chers amis,</p>
-          <p>
-            Vous êtes ici car vous êtes venus, viendrez ou êtes simplement
-            intéressés par les sessions PLAYGROUND.
-          </p>
-          <p>
-            Puisque nous tâtonnons dans nos recherches artistiques, il n’est pas
-            toujours évident d’expliquer ce que nous faisons. Ce site web est
-            une tentative de le définir, tout en préservant les zones
-            d’incertitudes inhérentes à toute pratique expérimentale.
-          </p>
-        </div>
-        <div class="constitution">
-          <ul>
-            <li><strong>0/ CONSTITUTION</strong></li>
-            <li>PLAYGROUND est un laboratoire artistique</li>
-            <li>PLAYGROUND est une expérimentation sociologique</li>
-            <li>PLAYGROUND est une action improductive</li>
-            <li>PLAYGROUND n’a pas de but</li>
-            <li>PLAYGROUND est.</li>
-            <li>PLAYGROUND sont des humains qui se connectent entre eux</li>
-            <li>PLAYGROUND, c’est prendre son temps</li>
-            <li>PLAYGROUND est le temps qui s’étire</li>
-            <li>PLAYGROUND est un endroit où on écoute son état intérieur</li>
-            <li>
-              PLAYGROUND est un lieu éphémère construit par ses participants
-            </li>
-            <li>PLAYGROUND est imprévisible mais organique</li>
-            <li>PLAYGROUND est un jeu sans règle</li>
-            <li>PLAYGROUND est une situation absurde</li>
-            <li>PLAYGROUND ne se prend pas au sérieux</li>
-            <li>PLAYGROUND est une quête d’authenticité</li>
-            <li>PLAYGROUND est un désir de faire collectif</li>
-          </ul>
-        </div>
-      </div>
-      <div id="content-en" class="language-content">
-        <div class="greeting-message">
-          <p><b>English Version</b></p>
-          <p>Dear friends,</p>
-          <p>
-            You’re here because you came to, will come to or are simply
-            interested in PLAYGROUND sessions.
-          </p>
-          <p>
-            As we are groping our way through our own artistic research, it is
-            not always easy to explain what we do. This website is an attempt to
-            define it, while preserving the areas of uncertainty inherent in any
-            experimental practice.
-          </p>
-        </div>
-        <div class="constitution">
-          <ul>
-            <li><strong>0/ CONSTITUTION</strong></li>
-            <li>PLAYGROUND is an art experiment</li>
-            <li>PLAYGROUND is a sociologic experiment</li>
-            <li>PLAYGROUND is an unproductive action</li>
-            <li>PLAYGROUND is purposeless</li>
-            <li>PLAYGROUND is.</li>
-            <li>PLAYGROUND are humans connecting with each others</li>
-            <li>PLAYGROUND is about taking your time</li>
-            <li>PLAYGROUND is the stretch of time</li>
-            <li>PLAYGROUND is where you listen to your inner state</li>
-            <li>PLAYGROUND is an ephemeral space built by its participants</li>
-            <li>PLAYGROUND is unpredictable but organic</li>
-            <li>PLAYGROUND is a game with blurred rules</li>
-            <li>PLAYGROUND is an absurd situation</li>
-            <li>PLAYGROUND is not taking it seriously</li>
-            <li>PLAYGROUND is a quest for authenticity</li>
-            <li>PLAYGROUND is a desire for collective actions</li>
-          </ul>
-        </div>
-      </div>
-    </main>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <title>PLAYGROUND</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Main Navigation Header -->
+  <header class="main-header">
+    <h1>PLAYGROUND</h1>
+    <button id="main-menu-toggle" class="main-menu-toggle" aria-label="Open main menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <nav class="main-nav">
+      <ul>
+        <li><a href="#/" data-link>Home</a></li>
+        <li><a href="#/presentation" data-link>Presentation</a></li>
+        <li><a href="#/references" data-link>References</a></li>
+        <!-- <li><a href="#/archive" data-link>Archive</a></li> -->
+        <li><a href="#/contact" data-link>Contact</a></li>
+      </ul>
+      <button id="language-toggle">FR</button>
+    </nav>
+  </header>
+
+  <!-- Right side audio menu -->
+  <div class="right-audio-menu">
+    <div class="audio-player">
+      <button id="audio-toggle" class="audio-btn">
+        <svg id="play-icon" width="16" height="16" viewBox="0 0 16 16" style="display: block;">
+          <polygon points="3,2 13,8 3,14" fill="white"/>
+        </svg>
+        <svg id="stop-icon" width="16" height="16" viewBox="0 0 16 16" style="display: none;">
+          <rect x="3" y="3" width="10" height="10" fill="white"/>
+        </svg>
+      </button>
+      <input type="range" id="audio-progress" class="audio-progress" min="0" max="100" value="0" step="1">
+    </div>
+  </div>
+
+  <!-- Right menu toggle (center-right, vertical burger) -->
+  <button id="audio-menu-toggle" class="audio-menu-toggle" aria-label="Open audio menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <audio id="background-audio" src="assets/audio/song2.mp3" loop></audio>
+  <main id="app"></main>
+  <script src="spa.js"></script>
+  <script>
+    const audio = document.getElementById('background-audio');
+    const audioBtn = document.getElementById('audio-toggle');
+    const progress = document.getElementById('audio-progress');
+    const playIcon = document.getElementById('play-icon');
+    const stopIcon = document.getElementById('stop-icon');
+
+    // Play/pause button
+    audioBtn.onclick = () => {
+      if (audio.paused) {
+        audio.play();
+        playIcon.style.display = 'none';
+        stopIcon.style.display = 'block';
+      } else {
+        audio.pause();
+        playIcon.style.display = 'block';
+        stopIcon.style.display = 'none';
+      }
+    };
+
+    // Update progress bar as audio plays
+    audio.addEventListener('timeupdate', () => {
+      if (audio.duration) {
+        progress.value = (audio.currentTime / audio.duration) * 100;
+      }
+    });
+
+    // Seek when user moves the slider
+    progress.addEventListener('input', () => {
+      if (audio.duration) {
+        audio.currentTime = (progress.value / 100) * audio.duration;
+      }
+    });
+
+    // Unlock audio on first user gesture
+    function unlockAudio() {
+      audio.play().then(() => {
+        playIcon.style.display = 'none';
+        stopIcon.style.display = 'block';
+      }).catch(() => {});
+      window.removeEventListener('click', unlockAudio);
+      window.removeEventListener('keydown', unlockAudio);
+      window.removeEventListener('touchstart', unlockAudio);
+    }
+    window.addEventListener('click', unlockAudio);
+    window.addEventListener('keydown', unlockAudio);
+    window.addEventListener('touchstart', unlockAudio);
+  </script>
+</body>
 </html>

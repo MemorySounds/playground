@@ -1,11 +1,313 @@
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&display=swap');
 body {
-  font-family: "Courier New", Times, serif;
-  background-color: #e8e7e7;
+  font-family: "Public Sans", Times, serif;
+  /* background-image: url(assets/images/background3.JPG);
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat; 
+  background-attachment: fixed; 
+  position: relative; */
 }
 
-header {
-  padding: 20px;
+/* ===== MAIN HEADER (ALWAYS VISIBLE) ===== */
+.main-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100vw;
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(10px);
+  border-bottom: 1.5px solid #111;
+  z-index: 9999;
+  padding: 1rem 2rem 0.5rem 2rem;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  /* transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); */
+}
+
+.main-header h1 {
+  font-size: 3rem;
+  margin: 0 0 0.5rem 0;
+  font-weight: 900;
+  letter-spacing: 0.5px;
   text-align: center;
+}
+
+.main-menu-toggle {
+  margin-bottom: 0.5rem;
+}
+
+.main-nav {
+  width: 100%;
+}
+
+#language-toggle {
+  display: block;
+  margin: 2rem auto 0 auto;
+  background: none;
+  border: 1px solid #000;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  font-weight: 500;
+}
+
+#language-toggle:hover {
+  color: #fff;
+}
+
+/* Navigation (hidden by default) */
+.main-nav {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  width: 100vw;
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(10px);
+  border-bottom: 1.5px solid #111;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-20px);
+  transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  padding: 2rem;
+}
+
+.main-header.expanded .main-nav {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.main-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column; /* Always vertical */
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.main-nav ul li a {
+  font-size: 1rem; /* Smaller size */
+  text-decoration: none;
+  color: #000;
+  font-weight: 400;
+  transition: color 0.3s ease;
+  padding: 0.5rem 1rem;
+}
+
+.main-nav ul li a:hover {
+  color: #666;
+}
+
+/* ===== HEADER BURGER MENU ===== */
+.main-menu-toggle {
+  background: none;
+  border: none;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  order: -1; /* Places it before the h1 */
+}
+
+.main-menu-toggle span {
+  width: 18px;
+  height: 2px;
+  background: #000;
+  border-radius: 1px;
+  transition: all 0.3s ease;
+}
+
+.main-menu-toggle.open span:nth-child(1) {
+  transform: rotate(45deg) translate(4px, 4px);
+}
+
+.main-menu-toggle.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.main-menu-toggle.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+  .main-header {
+    padding: 1rem 1.5rem 0.5rem 1.5rem;
+  }
+  
+  .main-header h1 {
+    margin-bottom: 0.3rem;
+  }
+  
+  .main-nav ul {
+    gap: 1rem;
+  }
+  
+  .main-nav ul li a {
+    font-size: 0.95rem;
+  }
+  
+  #language-toggle {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.6rem;
+    margin-top: 1.2rem;
+  }
+}
+
+/* ===== RIGHT AUDIO MENU ===== */
+.right-audio-menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 80px;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.9);
+  border-left: 1.5px solid #111;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 2rem 0;
+  transition: none;
+}
+
+body.ready .right-audio-menu {
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ===== AUDIO MENU TOGGLE (CENTER-RIGHT, VERTICAL) ===== */
+.audio-menu-toggle {
+  position: fixed;
+  top: 50%;
+  right: 0.6rem;
+  transform: translateY(-50%);
+  z-index: 1001;
+  background: transparent;
+  border: none;
+  width: 24px;
+  height: 50px;
+  display: none; /* Hidden by default, shown on mobile */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.audio-menu-toggle:hover {
+  transform: translateY(-50%) scale(1.1);
+}
+
+.audio-menu-toggle span {
+  width: 3px;
+  height: 3px;
+  background: #000;
+  border-radius: 1.5px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0.8;
+}
+
+.audio-menu-toggle:hover span {
+  opacity: 1;
+  background: #333;
+}
+
+.audio-menu-toggle.open span:nth-child(1) {
+  transform: rotate(45deg) translate(3px, 8px);
+  height: 16px;
+}
+
+.audio-menu-toggle.open span:nth-child(2) {
+  opacity: 0;
+  transform: scale(0);
+}
+
+.audio-menu-toggle.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(3px, -8px);
+  height: 16px;
+}
+
+/* ===== MOBILE BEHAVIOR ===== */
+@media (max-width: 768px) {
+  .right-audio-menu {
+    width: 80px;
+    transform: translateX(100%); /* Hidden by default */
+  }
+  
+  .right-audio-menu.open {
+    transform: translateX(0); /* Slides in */
+  }
+  
+  .audio-menu-toggle {
+    display: flex; /* Show the toggle button */
+  }
+  
+  .audio-menu-toggle.open {
+    right: calc(25% + 0.5rem); /* Moves with the menu */
+  }
+}
+
+/* ===== DESKTOP BEHAVIOR ===== */
+@media (min-width: 769px) {
+  .audio-menu-toggle {
+    display: none; /* Hidden on desktop */
+  }
+}
+
+/* ===== GENERAL STYLES ===== */
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+h2 {
+  padding: 50px 0 0 0;
+}
+
+.first-section { 
+  padding: 0;
+}
+
+.language-content .greeting-message,
+.language-content .greeting-message-fr {
+  margin-bottom: 75px;
+}
+
+.constitution {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0;
+}
+
+.playground {
+  font-style: italic;
+  font-weight: 600;
+}
+
+hr {
+  margin: 50px 0;
+}
+
+#content-en {
+  display: none;
 }
 
 ul {
@@ -39,17 +341,25 @@ h2 {
   padding: 50px 0 0 0;
 }
 
+/* ===== CONTENT STYLES ===== */
 .main-content {
-  padding: 0 100px 100px 100px;
+  padding: 6rem 6rem 6rem 6rem; /* Top padding accounts for fixed header */
+  margin-top: 80px;
+  box-sizing: border-box;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    padding: 5rem 1.5rem 2rem 1.5rem; /* Adjusted for smaller header on mobile */
+    margin-right: 0; /* No margin on mobile */
+  }
 }
 
 .language-content .greeting-message,
 .language-content .greeting-message-fr {
-  margin-bottom: 75px;
-}
-
-.constitution {
-  border-radius: 10px;
+  margin-bottom: 50px;
 }
 
 hr {
@@ -62,6 +372,7 @@ hr {
   }
 
   .main-content {
+    margin-top: 140px;
     padding: 0 20px 20px 20px; /* Adjust padding for mobile devices */
   }
 
@@ -78,27 +389,189 @@ hr {
 
 .nav-language-wrapper {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 }
 
 nav {
   flex-grow: 1;
   text-align: center;
-  margin-left: 350px;
 }
 
-#language-toggle {
-  background: none;
-  border: none;
-  font-size: 1rem;
+/* Audio player wrapper */
+.audio-player {
+  height: 50px;
+  width: 100%;
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Progress slider - hidden by default */
+.audio-progress {
+  position: absolute;
+  bottom: 35px;
+  right: 0;
+  width: 120px;
+  height: 2px;
+  background: #fff;
+  border: 1px solid #000;
+  border-radius: 0;
+  outline: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s, visibility 0.2s;
   cursor: pointer;
-  transition: color 0.3s ease, background-color 0.3s ease;
-  margin-right: 350px;
-  font-family: inherit;
-  font-weight: 700;
+  -webkit-appearance: none;
+  appearance: none;
 }
 
-#language-toggle:hover {
-  color: #b7b7b7;
+/* Show progress on hover */
+.audio-player:hover .audio-progress {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Progress slider - hidden by default */
+.audio-progress {
+  position: absolute;
+  bottom: 270px;
+  right: -112px;
+  width: 300px;
+  height: 16px; 
+  transform: rotate(-90deg);
+  background: transparent;
+  border: none;
+  outline: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s, visibility 0.2s;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* Show progress on hover */
+.audio-player:hover .audio-progress,
+.audio-progress:focus {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Custom slider track: thin black line */
+.audio-progress::-webkit-slider-runnable-track {
+  height: 2px;
+  background: #111;
+  border-radius: 0;
+}
+
+.audio-progress::-moz-range-track {
+  height: 2px;
+  background: #111;
+  border-radius: 0;
+}
+
+.audio-progress::-ms-fill-lower,
+.audio-progress::-ms-fill-upper {
+  background: #111;
+  border-radius: 0;
+}
+
+/* Custom slider thumb: black circle */
+.audio-progress::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  background: #111;
+  border-radius: 50%;
+  border: none;
+  margin-top: -5px; /* Center the thumb on the track */
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.audio-progress::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  background: #111;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.audio-progress::-ms-thumb {
+  width: 12px;
+  height: 12px;
+  background: #111;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+/* Remove default outline and background for all browsers */
+.audio-progress:focus {
+  outline: none;
+  box-shadow: none;
+  background: transparent;
+}
+
+/* Hide the ugly focus border in Firefox */
+.audio-progress::-moz-focus-outer {
+  border: 0;
+}
+
+/* Keep existing audio button styles */
+.audio-btn {
+  background: #000 !important;
+  opacity: 50%;
+  color: #fff !important;
+  border: 1px solid #000 !important;
+  border-radius: 0 !important;
+  padding: 6px;
+  font-size: 14px !important;
+  cursor: pointer !important;
+  transition: background 0.2s !important;
+}
+
+.audio-btn:hover {
+  background: #333 !important;
+}
+
+/* --- PLAYGROUND two-column list styles --- */
+.playground-list {
+  border: solid;
+  padding: 20px;
+  margin: 0;
+}
+.playground-list li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5em;
+  margin-bottom: 0.5em;
+}
+.playground-list .playground {
+  min-width: 110px;
+  font-style: italic;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+.playground-list .desc {
+  flex: 1;
+  word-break: break-word;
+}
+@media (max-width: 600px) {
+  .playground-list {
+    font-size: 0.6rem;
+  }
+  .playground-list .playground {
+    min-width: 80px;
+    font-size: 0.95em;
+  }
+  .playground-list li {
+    gap: 0.3em;
+  }
 }

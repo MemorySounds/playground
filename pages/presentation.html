@@ -4,28 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Presentation - PLAYGROUND</title>
-    <link rel="stylesheet" href="styles.css" />
-    <script src="scripts.js"></script>
   </head>
   <body>
-    <header>
-      <h1>Welcome to PLAYGROUND</h1>
-      <div class="nav-language-wrapper">
-        <nav>
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="presentation.html">Presentation</a></li>
-            <li><a href="references.html">References</a></li>
-            <li><a href="archive.html">Archive</a></li>
-            <li><a href="contact.html">Contact</a></li>
-          </ul>
-        </nav>
-        <button id="language-toggle">FR</button>
-      </div>
-    </header>
     <main class="main-content">
       <div id="content-fr">
-        <h2>QUI NOUS SOMMES</h2>
+        <h2 class="first-section">QUI NOUS SOMMES</h2>
         <p>
           Robert est un danseur, issu du breakdance, qui ne souhaite plus faire
           de battles depuis qu’il s’est installé à Paris. Hugo travaille comme
@@ -115,7 +98,7 @@
         <h2>LE JEU</h2>
       </div>
       <div id="content-en">
-        <h2>WHO WE ARE</h2>
+        <h2 class="first-section">WHO WE ARE</h2>
         <p>
           Robert is a dancer coming from a breaking background, who hasn’t
           wanted to do battles since he settled in Paris. Hugo worked as a
@@ -213,5 +196,6 @@
         </p>
       </div>
     </main>
+    <iframe src="audio-player.html" style="display:none;" id="audio-player"></iframe>
   </body>
 </html>
