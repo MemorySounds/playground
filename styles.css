@@ -55,7 +55,6 @@ body {
   transition: all 0.3s ease;
   font-family: inherit;
   font-weight: 500;
-  border-radius: 3px;
   color: #000; /* Ensure black text */
 }
 
