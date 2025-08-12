@@ -8,7 +8,9 @@ const routes = {
 
 async function loadPage(hash) {
   const file = routes[hash] || routes["#/"];
+  console.log(file);
   const html = await fetch(file).then(res => res.text());
+  console.log(html);
   document.getElementById("app").innerHTML = html;
   setupLanguageToggle();
 }
