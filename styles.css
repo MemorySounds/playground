@@ -55,9 +55,12 @@ body {
   transition: all 0.3s ease;
   font-family: inherit;
   font-weight: 500;
+  border-radius: 3px;
+  color: #000; /* Ensure black text */
 }
 
 #language-toggle:hover {
+  background: #000;
   color: #fff;
 }
 
@@ -209,6 +212,7 @@ body.ready .right-audio-menu {
   gap: 4px;
   cursor: pointer;
   transition: all 0.3s ease;
+  padding: 10px; /* Add padding for larger touch area */
 }
 
 .audio-menu-toggle:hover {
@@ -450,13 +454,23 @@ nav {
   cursor: pointer;
   -webkit-appearance: none;
   appearance: none;
+  touch-action: pan-x; /* Allow horizontal touch movement only */
 }
 
-/* Show progress on hover */
+/* Show progress on hover and touch */
 .audio-player:hover .audio-progress,
-.audio-progress:focus {
+.audio-progress:focus,
+.audio-progress:active {
   opacity: 1;
   visibility: visible;
+}
+
+/* Mobile specific fixes for audio progress */
+@media (max-width: 768px) {
+  .audio-progress {
+    height: 20px; /* Larger touch target on mobile */
+    touch-action: manipulation; /* Prevent page scroll during touch */
+  }
 }
 
 /* Custom slider track: thin black line */
@@ -517,6 +531,26 @@ nav {
   outline: none;
   box-shadow: none;
   background: transparent;
+}
+
+/* Remove white highlight on mobile touch */
+.audio-progress:focus::-webkit-slider-thumb,
+.audio-progress:active::-webkit-slider-thumb {
+  background: #111; /* Keep black, don't turn white */
+}
+
+.audio-progress:focus::-moz-range-thumb,
+.audio-progress:active::-moz-range-thumb {
+  background: #111; /* Keep black, don't turn white */
+}
+
+/* Remove tap highlight on mobile */
+.audio-progress {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 /* Hide the ugly focus border in Firefox */
