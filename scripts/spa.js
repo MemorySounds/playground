@@ -25,7 +25,8 @@ function navigate(event) {
 
 window.addEventListener("hashchange", () => loadPage(location.hash));
 document.addEventListener("DOMContentLoaded", () => {
-  document.body.classList.add("ready"); // Add as early as possible
+  window.scrollTo(0,0);
+  document.body.classList.add("ready");
   document.body.addEventListener("click", navigate);
   loadPage(location.hash || "#/");
 });
@@ -73,16 +74,26 @@ const rightAudioMenu = document.querySelector('.right-audio-menu');
 
 // Main navigation menu toggle (expands header downward)
 mainMenuToggle.addEventListener('click', () => {
-  const isExpanded = mainHeader.classList.contains('expanded');
   mainHeader.classList.toggle('expanded');
-  mainMenuToggle.classList.toggle('open');
+  document.body.classList.toggle('nav-open', mainHeader.classList.contains('expanded'));
+  mainMenuToggle.classList.toggle('open', mainHeader.classList.contains('expanded'));
+
 });
 
 // Close main menu when clicking nav links
 document.addEventListener('click', (e) => {
-  if (e.target.matches('[data-link]')) {
+  if (e.target.matches('[data-link]') || e.target.matches('#language-toggle')) {
     mainHeader.classList.remove('expanded');
     mainMenuToggle.classList.remove('open');
+    document.body.classList.remove('nav-open');
+
+     // Scroll to top of content + offset
+    setTimeout(() => {
+      const app = document.getElementById('playground-title');
+      const offset = 20;
+      const top = app.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }, 0);
   }
 });
 
@@ -91,6 +102,7 @@ document.addEventListener('click', (e) => {
   if (!mainHeader.contains(e.target)) {
     mainHeader.classList.remove('expanded');
     mainMenuToggle.classList.remove('open');
+    document.body.classList.remove('nav-open');
   }
 });
 
@@ -100,6 +112,13 @@ if (audioMenuToggle) {
     const isOpen = rightAudioMenu.classList.contains('open');
     rightAudioMenu.classList.toggle('open');
     audioMenuToggle.classList.toggle('open');
+    
+    // Prevent body scrolling when audio menu is open
+    if (rightAudioMenu.classList.contains('open')) {
+      document.body.classList.add('audio-menu-open');
+    } else {
+      document.body.classList.remove('audio-menu-open');
+    }
   });
 
   // Close audio menu when clicking outside
@@ -107,6 +126,7 @@ if (audioMenuToggle) {
     if (!rightAudioMenu.contains(e.target) && !audioMenuToggle.contains(e.target)) {
       rightAudioMenu.classList.remove('open');
       audioMenuToggle.classList.remove('open');
+      document.body.classList.remove('audio-menu-open'); 
     }
   });
 }

@@ -6,17 +6,28 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+    <!-- <div class="grain-overlay"></div> -->
+
+  <div class="video-wrapper">
+    <video class="video-bg" autoplay loop muted playsinline>
+      <source src="assets/video/background-video-4.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </source>
+    </video>
+    <div class="flicker-overlay"></div>
+  </div>
   <!-- Main Navigation Header -->
   <header class="main-header">
-    <h1>PLAYGROUND</h1>
+    <h1 id="playground-title">PLAYGROUND</h1>
     <button id="main-menu-toggle" class="main-menu-toggle" aria-label="Open main menu">
       <span></span>
       <span></span>
       <span></span>
     </button>
     <nav class="main-nav">
+      <!-- <button class="nav-close" aria-label="Close menu">&times;</button> -->
       <ul>
-        <li><a href="#/" data-link>Home</a></li>
+        <li><a href="#/" data-link>Intro</a></li>
         <li><a href="#/presentation" data-link>Presentation</a></li>
         <li><a href="#/references" data-link>References</a></li>
         <!-- <li><a href="#/archive" data-link>Archive</a></li> -->
@@ -37,6 +48,7 @@
           <rect x="3" y="3" width="10" height="10" fill="white"/>
         </svg>
       </button>
+      <div id="time-remaining" class="time-display">00:00</div>
       <input type="range" id="audio-progress" class="audio-progress" min="0" max="100" value="0" step="1">
     </div>
   </div>
@@ -50,54 +62,7 @@
 
   <audio id="background-audio" src="assets/audio/song2.mp3" loop></audio>
   <main id="app"></main>
-  <script src="spa.js"></script>
-  <script>
-    const audio = document.getElementById('background-audio');
-    const audioBtn = document.getElementById('audio-toggle');
-    const progress = document.getElementById('audio-progress');
-    const playIcon = document.getElementById('play-icon');
-    const stopIcon = document.getElementById('stop-icon');
-
-    // Play/pause button
-    audioBtn.onclick = () => {
-      if (audio.paused) {
-        audio.play();
-        playIcon.style.display = 'none';
-        stopIcon.style.display = 'block';
-      } else {
-        audio.pause();
-        playIcon.style.display = 'block';
-        stopIcon.style.display = 'none';
-      }
-    };
-
-    // Update progress bar as audio plays
-    audio.addEventListener('timeupdate', () => {
-      if (audio.duration) {
-        progress.value = (audio.currentTime / audio.duration) * 100;
-      }
-    });
-
-    // Seek when user moves the slider
-    progress.addEventListener('input', () => {
-      if (audio.duration) {
-        audio.currentTime = (progress.value / 100) * audio.duration;
-      }
-    });
-
-    // Unlock audio on first user gesture
-    function unlockAudio() {
-      audio.play().then(() => {
-        playIcon.style.display = 'none';
-        stopIcon.style.display = 'block';
-      }).catch(() => {});
-      window.removeEventListener('click', unlockAudio);
-      window.removeEventListener('keydown', unlockAudio);
-      window.removeEventListener('touchstart', unlockAudio);
-    }
-    window.addEventListener('click', unlockAudio);
-    window.addEventListener('keydown', unlockAudio);
-    window.addEventListener('touchstart', unlockAudio);
-  </script>
+  <script src="scripts/spa.js"></script>
+  <script src="scripts/audio.js" ></script>
 </body>
 </html>
