@@ -106,6 +106,30 @@ document.addEventListener('click', (e) => {
   }
 });
 
+// Close main menu when clicking outside nav links (dead space or outside menu)
+document.addEventListener('click', (e) => {
+  const navMenu = document.querySelector('.main-nav');
+  const navToggle = document.getElementById('main-menu-toggle');
+  // If menu is open
+  if (document.body.classList.contains('nav-open')) {
+    console.log(e.target)
+    // If click is outside navMenu and toggle, close menu
+    if (!navMenu.contains(e.target) && !navToggle.contains(e.target)) {
+      mainHeader.classList.remove('expanded');
+      mainMenuToggle.classList.remove('open');
+      document.body.classList.remove('nav-open');
+    }
+    // If click is inside navMenu but NOT on a nav link, close menu
+    else if (navMenu.contains(e.target) && !e.target.matches('[data-link]')) {
+      mainHeader.classList.remove('expanded');
+      mainMenuToggle.classList.remove('open');
+      document.body.classList.remove('nav-open');
+    }
+  }
+});
+
+
+
 // Audio menu toggle (mobile only)
 if (audioMenuToggle) {
   audioMenuToggle.addEventListener('click', () => {
