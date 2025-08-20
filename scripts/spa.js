@@ -90,7 +90,7 @@ document.addEventListener('click', (e) => {
      // Scroll to top of content + offset
     setTimeout(() => {
       const app = document.getElementById('playground-title');
-      const offset = 20;
+      const offset = 40;
       const top = app.getBoundingClientRect().top + window.scrollY - offset;
       window.scrollTo({ top, behavior: 'smooth' });
     }, 0);
