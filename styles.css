@@ -88,7 +88,7 @@ body.nav-open {
   transition: all 0.3s ease;
   font-family: inherit;
   font-weight: 500;
-  color: #000; 
+  color: #000;
 }
 
 #language-toggle:hover {
@@ -107,21 +107,16 @@ body.nav-open {
   width: 100vw;
   height: 100vh;
   box-sizing: border-box;
-  visibility: hidden;
-  backdrop-filter: blur(10px);
-  opacity: 0;
-  transform: translateX(20px);
-  transition: opacity 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  background-color: white;
+  transform: translateX(100vw);
+  transition: transform 0.5s ease-in-out;
   padding: 2rem;
   overflow-y: auto;
   z-index: 10;
 }
 
 .main-header.expanded .main-nav {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-  transform: translateY(0); 
+  transform: translateX(0);
 }
 
 .main-nav ul {
@@ -131,7 +126,6 @@ body.nav-open {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* gap: 1.5rem; */
 }
 
 .main-nav ul li a {
@@ -142,11 +136,10 @@ body.nav-open {
   color: #000;
   font-weight: 900;
   padding: 0.5rem 1rem;
-  transition: all 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .main-nav ul li a:hover {
-  color: #666;
   background-color: black;
   color: white;
   border-radius: 0;
@@ -200,6 +193,11 @@ body.nav-open {
   
   .main-nav ul li a {
     font-size: 0.95rem;
+  }
+
+  .main-nav ul li a:hover {
+    background-color: transparent;
+    color: black;  
   }
   
   #language-toggle {
