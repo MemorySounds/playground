@@ -1,10 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&display=swap');
-html, body, *, *::before, *::after {
+html,
+body,
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
 body {
-  font-family: "Public Sans", Times, serif;
+  font-family: 'Public Sans', Times, serif;
   /* background-image: url(assets/images/background5.png);
   background-size: cover; 
   background-position: center; 
@@ -25,7 +29,7 @@ body.nav-open {
 /* ===== MAIN HEADER (ALWAYS VISIBLE) ===== */
 .main-header {
   box-sizing: border-box;
-  border-bottom: 1.5px solid #111; 
+  border-bottom: 1.5px solid #111;
   padding: 1rem 0 0.5rem 0;
   display: flex;
   flex-direction: column-reverse;
@@ -130,7 +134,7 @@ body.nav-open {
 
 .main-nav ul li a {
   width: 100vw;
-  font-size: 2rem !important; 
+  font-size: 2rem !important;
   display: inline-block;
   text-decoration: none;
   color: #000;
@@ -186,20 +190,20 @@ body.nav-open {
   .main-header {
     padding: 1rem 1.5rem 0.5rem 1.5rem;
   }
-  
+
   .main-header h1 {
     margin-bottom: 0.3rem;
   }
-  
+
   .main-nav ul li a {
     font-size: 0.95rem;
   }
 
   .main-nav ul li a:hover {
     background-color: transparent;
-    color: black;  
+    color: black;
   }
-  
+
   #language-toggle {
     font-size: 0.7rem;
     padding: 0.3rem 0.6rem;
@@ -253,7 +257,7 @@ body.ready .right-audio-menu {
   gap: 4px;
   cursor: pointer;
   transition: all 0.3s ease;
-  padding: 10px; 
+  padding: 10px;
 }
 
 .audio-menu-toggle:hover {
@@ -288,16 +292,16 @@ body.ready .right-audio-menu {
     width: 60px;
     transform: translateX(100%);
   }
-  
+
   .right-audio-menu.open {
     transform: translateX(0); /* Slides in */
   }
-  
+
   .audio-menu-toggle {
     color: black;
     display: flex;
   }
-  
+
   .audio-menu-toggle.open {
     right: calc(60px + 1rem); /* Moves with the menu */
   }
@@ -320,7 +324,7 @@ h2 {
   padding: 50px 0 0 0;
 }
 
-.first-section { 
+.first-section {
   padding: 0;
 }
 
@@ -367,7 +371,9 @@ nav ul li {
 nav ul li a {
   text-decoration: none;
   color: #000000;
-  transition: 0.3s ease, color 0.3s ease;
+  transition:
+    0.3s ease,
+    color 0.3s ease;
   padding: 5px;
   border-radius: 5px;
 }
@@ -383,13 +389,14 @@ h2 {
 /* ===== CONTENT STYLES ===== */
 .main-content {
   position: absolute;
+  text-align: justify;
   top: 100vh;
   left: 0;
   width: 100vw;
   min-height: 100vh;
   overflow-y: auto;
   z-index: 1;
-  padding: 6rem 6rem 6rem 6rem; 
+  padding: 6rem 22rem 6rem 20rem;
   /* margin-top: 20px; */
   box-sizing: border-box;
   max-width: 100vw;
@@ -419,17 +426,17 @@ hr {
 
   .main-content {
     margin-top: 50px;
-    padding: 0 40px 20px 20px; 
+    padding: 0 40px 20px 20px;
   }
 
   nav ul li {
-    display: block; 
+    display: block;
     margin: 10px 0;
   }
 
   nav ul li a {
-    display: block; 
-    text-align: center; 
+    display: block;
+    text-align: center;
   }
 }
 
@@ -490,8 +497,8 @@ nav {
 @media (max-width: 768px) {
   .audio-progress {
     right: -122px;
-    height: 20px; 
-    touch-action: none; 
+    height: 20px;
+    touch-action: none;
   }
 }
 
@@ -523,7 +530,7 @@ nav {
   background: #111;
   border-radius: 50%;
   border: none;
-  margin-top: -5px; 
+  margin-top: -5px;
   cursor: pointer;
   transition: background 0.2s;
 }
