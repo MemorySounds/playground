@@ -1,0 +1,43 @@
+---
+layout: base.njk
+title: Événements — PLAYGROUND
+---
+<div class="news-listing">
+
+  <div id="content-fr" class="language-content">
+    <h2 class="page-heading">Événements</h2>
+  </div>
+  <div id="content-en" class="language-content">
+    <h2 class="page-heading">Events</h2>
+  </div>
+
+  {% if collections.events.length %}
+    <ul class="news-list">
+      {% for post in collections.events %}
+        <li class="news-item">
+          {% if post.data.cover_image %}
+            <a href="{{ post.url }}" data-nav-link class="news-cover-link">
+              <img src="{{ post.data.cover_image }}" alt="" class="news-cover-thumb" />
+            </a>
+          {% endif %}
+          <div class="news-item-body">
+            <time class="news-date" datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate }}</time>
+            <div id="content-fr" class="language-content">
+              <a href="{{ post.url }}" data-nav-link class="news-title">{{ post.data.title_fr or post.data.title }}</a>
+            </div>
+            <div id="content-en" class="language-content">
+              <a href="{{ post.url }}" data-nav-link class="news-title">{{ post.data.title_en or post.data.title }}</a>
+            </div>
+            {% if post.data.author %}
+              <span class="news-author">{{ post.data.author }}</span>
+            {% endif %}
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <div id="content-fr" class="language-content"><p><em>Aucun événement pour le moment.</em></p></div>
+    <div id="content-en" class="language-content"><p><em>No events yet.</em></p></div>
+  {% endif %}
+
+</div>
