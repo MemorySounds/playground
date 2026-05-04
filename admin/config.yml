@@ -2,6 +2,7 @@ backend:
   name: github
   repo: MemorySounds/playground
   branch: main
+  app_id: Ov23liZr6pAV4dPIQi3P
 
 # Media uploaded via the CMS goes here; public URL prefix for generated markdown
 media_folder: assets/images
