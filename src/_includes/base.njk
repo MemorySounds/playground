@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ title if title else "PLAYGROUND" }}</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+
+  <div class="video-wrapper">
+    <video class="video-bg" autoplay loop muted playsinline>
+      <source src="/assets/video/background-video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </source>
+    </video>
+    <div class="flicker-overlay"></div>
+  </div>
+
+  <!-- Main Navigation Header -->
+  <header class="main-header">
+    <h1 id="playground-title"><a href="/" style="text-decoration:none;color:inherit;">PLAYGROUND</a></h1>
+    <button id="main-menu-toggle" class="main-menu-toggle" aria-label="Open main menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <nav class="main-nav">
+      <ul>
+        <li><a href="/" data-nav-link>Intro</a></li>
+        <li><a href="/presentation/" data-nav-link>Presentation</a></li>
+        <li><a href="/references/" data-nav-link>References</a></li>
+        <li><a href="/archive/" data-nav-link>Archive</a></li>
+        <li><a href="/events/" data-nav-link>Events</a></li>
+        <li><a href="/news/" data-nav-link>News</a></li>
+        <li><a href="/contact/" data-nav-link>Contact</a></li>
+      </ul>
+      <button id="language-toggle">FRANÇAIS</button>
+    </nav>
+  </header>
+
+  <!-- Right side audio menu -->
+  <div class="right-audio-menu">
+    <div class="audio-player">
+      <button id="audio-toggle" class="audio-btn">
+        <svg id="play-icon" width="16" height="16" viewBox="0 0 16 16" style="display: block;">
+          <polygon points="3,2 13,8 3,14" fill="white"/>
+        </svg>
+        <svg id="stop-icon" width="16" height="16" viewBox="0 0 16 16" style="display: none;">
+          <rect x="3" y="3" width="10" height="10" fill="white"/>
+        </svg>
+      </button>
+      <div id="time-remaining" class="time-display">00:00</div>
+      <input type="range" id="audio-progress" class="audio-progress" min="0" max="100" value="0" step="1">
+    </div>
+  </div>
+
+  <!-- Audio menu toggle (right side burger) -->
+  <button id="audio-menu-toggle" class="audio-menu-toggle" aria-label="Open audio menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <audio id="background-audio" src="/assets/audio/song2.mp3" loop></audio>
+
+  <main class="main-content">
+    {{ content | safe }}
+  </main>
+
+  <script src="/scripts/audio.js"></script>
+  <script>
+    // ── Menu toggle ──────────────────────────────────────────────────────────
+    const mainMenuToggle = document.getElementById('main-menu-toggle');
+    const audioMenuToggle = document.getElementById('audio-menu-toggle');
+    const mainHeader = document.querySelector('.main-header');
+    const rightAudioMenu = document.querySelector('.right-audio-menu');
+
+    function closeMenu() {
+      mainHeader.classList.remove('expanded');
+      mainMenuToggle.classList.remove('open');
+      document.body.classList.remove('nav-open');
+    }
+
+    mainMenuToggle.addEventListener('click', () => {
+      mainHeader.classList.toggle('expanded');
+      const isOpen = mainHeader.classList.contains('expanded');
+      document.body.classList.toggle('nav-open', isOpen);
+      mainMenuToggle.classList.toggle('open', isOpen);
+    });
+
+    if (audioMenuToggle) {
+      audioMenuToggle.addEventListener('click', () => {
+        rightAudioMenu.classList.toggle('visible');
+        audioMenuToggle.classList.toggle('open');
+      });
+    }
+
+    // Close menu when a nav link is clicked
+    document.addEventListener('click', (e) => {
+      if (e.target.matches('[data-nav-link]') || e.target.matches('#language-toggle')) {
+        closeMenu();
+      }
+    });
+
+    // Close menu when clicking outside it
+    document.addEventListener('click', (e) => {
+      const navMenu = document.querySelector('.main-nav');
+      if (document.body.classList.contains('nav-open')) {
+        if (!navMenu.contains(e.target) && !mainMenuToggle.contains(e.target)) {
+          closeMenu();
+        } else if (navMenu.contains(e.target) && !e.target.matches('[data-nav-link]')) {
+          closeMenu();
+        }
+      }
+    });
+
+    // ── Language toggle ──────────────────────────────────────────────────────
+    const languageToggle = document.getElementById('language-toggle');
+    const contentFr = document.getElementById('content-fr');
+    const contentEn = document.getElementById('content-en');
+
+    if (languageToggle && contentFr && contentEn) {
+      const saved = localStorage.getItem('language');
+
+      function setLanguage(lang) {
+        if (lang === 'en') {
+          contentFr.style.display = 'none';
+          contentEn.style.display = 'block';
+          languageToggle.textContent = 'FRANÇAIS';
+        } else {
+          contentFr.style.display = 'block';
+          contentEn.style.display = 'none';
+          languageToggle.textContent = 'ENGLISH';
+        }
+        localStorage.setItem('language', lang);
+      }
+
+      setLanguage(saved || 'fr');
+
+      languageToggle.addEventListener('click', () => {
+        const current = localStorage.getItem('language') || 'fr';
+        setLanguage(current === 'fr' ? 'en' : 'fr');
+      });
+    }
+  </script>
+
+</body>
+</html>
