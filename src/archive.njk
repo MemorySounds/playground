@@ -1,0 +1,17 @@
+---
+layout: base.njk
+title: Archive — PLAYGROUND
+---
+<div id="archive-gate" data-password="{{ archive.password }}">
+  <p>MOT DE PASSE / PASSWORD :</p>
+  <input type="password" id="password-input" autocomplete="off" />
+  <p id="password-error" style="display:none;">Incorrect / Wrong password.</p>
+</div>
+<div id="archive-content" style="display:none;">
+  <div id="content-fr" class="language-content">
+    {{ archive.body_fr | markdownify | safe }}
+  </div>
+  <div id="content-en" class="language-content">
+    {{ archive.body_en | markdownify | safe }}
+  </div>
+</div>
