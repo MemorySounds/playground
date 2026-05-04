@@ -32,7 +32,6 @@
         <li><a href="/references/" data-nav-link>References</a></li>
         <li><a href="/archive/" data-nav-link>Archive</a></li>
         <li><a href="/events/" data-nav-link>Events</a></li>
-        {# <li><a href="/news/" data-nav-link>News</a></li> #}
         <li><a href="/contact/" data-nav-link>Contact</a></li>
       </ul>
       <button id="language-toggle">FRANÇAIS</button>
@@ -134,10 +133,32 @@
     }
 
     setLanguage(localStorage.getItem('language') || 'fr');
+    initArchiveGate();
 
     if (languageToggle) {
       languageToggle.addEventListener('click', () => {
         setLanguage((localStorage.getItem('language') || 'fr') === 'fr' ? 'en' : 'fr');
+      });
+    }
+
+    // ── Archive password gate ────────────────────────────────────────────────
+    // Inline scripts inside swapped innerHTML don't execute, so the gate logic
+    // lives here in the shell and is re-initialised after every navigation.
+    function initArchiveGate() {
+      const input = document.getElementById('password-input');
+      if (!input) return;
+      const gate = document.getElementById('archive-gate');
+      const content = document.getElementById('archive-content');
+      const error = document.getElementById('password-error');
+      input.addEventListener('keydown', (e) => {
+        if (e.key !== 'Enter') return;
+        if (input.value === gate.dataset.password) {
+          gate.style.display = 'none';
+          content.style.display = 'block';
+        } else {
+          if (error) error.style.display = 'block';
+          input.value = '';
+        }
       });
     }
 
@@ -154,6 +175,7 @@
         if (newMain && currentMain) currentMain.innerHTML = newMain.innerHTML;
         document.title = doc.title;
         setLanguage(localStorage.getItem('language') || 'fr');
+        initArchiveGate();
       } catch (_) {
         window.location.href = url;
       }
