@@ -1,0 +1,14 @@
+# NOTE: This password is embedded in the built HTML and visible in page source.
+# It is intentional security-theatre — enough to gate casual visitors, not true protection.
+# Change this to whatever word or phrase you want.
+password: 'playground'
+
+body_fr: |
+  Bienvenue dans les archives secrètes.
+
+  *Contenu à venir...*
+
+body_en: |
+  Welcome to the secret archive.
+
+  *Content coming soon...*
