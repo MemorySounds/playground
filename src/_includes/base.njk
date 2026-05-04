@@ -32,7 +32,7 @@
         <li><a href="/references/" data-nav-link>References</a></li>
         <li><a href="/archive/" data-nav-link>Archive</a></li>
         <li><a href="/events/" data-nav-link>Events</a></li>
-        <li><a href="/news/" data-nav-link>News</a></li>
+        {# <li><a href="/news/" data-nav-link>News</a></li> #}
         <li><a href="/contact/" data-nav-link>Contact</a></li>
       </ul>
       <button id="language-toggle">FRANÇAIS</button>
@@ -75,6 +75,7 @@
     const audioMenuToggle = document.getElementById('audio-menu-toggle');
     const mainHeader = document.querySelector('.main-header');
     const rightAudioMenu = document.querySelector('.right-audio-menu');
+    const languageToggle = document.getElementById('language-toggle');
 
     function closeMenu() {
       mainHeader.classList.remove('expanded');
@@ -116,33 +117,62 @@
     });
 
     // ── Language toggle ──────────────────────────────────────────────────────
-    const languageToggle = document.getElementById('language-toggle');
-    const contentFr = document.getElementById('content-fr');
-    const contentEn = document.getElementById('content-en');
-
-    if (languageToggle && contentFr && contentEn) {
-      const saved = localStorage.getItem('language');
-
-      function setLanguage(lang) {
-        if (lang === 'en') {
-          contentFr.style.display = 'none';
-          contentEn.style.display = 'block';
-          languageToggle.textContent = 'FRANÇAIS';
-        } else {
-          contentFr.style.display = 'block';
-          contentEn.style.display = 'none';
-          languageToggle.textContent = 'ENGLISH';
-        }
-        localStorage.setItem('language', lang);
+    // Re-queries the DOM each call so it works after content swaps.
+    function setLanguage(lang) {
+      const contentFr = document.getElementById('content-fr');
+      const contentEn = document.getElementById('content-en');
+      if (lang === 'en') {
+        if (contentFr) contentFr.style.display = 'none';
+        if (contentEn) contentEn.style.display = 'block';
+        if (languageToggle) languageToggle.textContent = 'FRANÇAIS';
+      } else {
+        if (contentFr) contentFr.style.display = 'block';
+        if (contentEn) contentEn.style.display = 'none';
+        if (languageToggle) languageToggle.textContent = 'ENGLISH';
       }
+      localStorage.setItem('language', lang);
+    }
 
-      setLanguage(saved || 'fr');
+    setLanguage(localStorage.getItem('language') || 'fr');
 
+    if (languageToggle) {
       languageToggle.addEventListener('click', () => {
-        const current = localStorage.getItem('language') || 'fr';
-        setLanguage(current === 'fr' ? 'en' : 'fr');
+        setLanguage((localStorage.getItem('language') || 'fr') === 'fr' ? 'en' : 'fr');
       });
     }
+
+    // ── Fetch navigation (keeps audio alive across pages) ────────────────────
+    // Intercepts nav-link clicks, fetches the target, swaps only <main> content,
+    // and updates the URL — the audio element in the shell is never destroyed.
+    async function navigateTo(url) {
+      try {
+        const res = await fetch(url);
+        if (!res.ok) { window.location.href = url; return; }
+        const doc = new DOMParser().parseFromString(await res.text(), 'text/html');
+        const newMain = doc.querySelector('main.main-content');
+        const currentMain = document.querySelector('main.main-content');
+        if (newMain && currentMain) currentMain.innerHTML = newMain.innerHTML;
+        document.title = doc.title;
+        setLanguage(localStorage.getItem('language') || 'fr');
+      } catch (_) {
+        window.location.href = url;
+      }
+    }
+
+    document.addEventListener('click', (e) => {
+      const link = e.target.closest('[data-nav-link]');
+      if (!link) return;
+      const href = link.getAttribute('href');
+      if (!href || href.startsWith('http') || href.startsWith('//')) return;
+      e.preventDefault();
+      if (href === window.location.pathname) return;
+      history.pushState(null, '', href);
+      navigateTo(href);
+    });
+
+    window.addEventListener('popstate', () => {
+      navigateTo(window.location.pathname || '/');
+    });
   </script>
 
 </body>
