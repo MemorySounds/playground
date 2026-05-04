@@ -638,3 +638,85 @@ nav {
     gap: 0.3em;
   }
 }
+
+/* ===== EVENTS GRID (listing page) ===== */
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  padding: 0;
+  margin: 2rem 0 0 0;
+}
+
+.events-grid-item {
+  list-style: none;
+}
+
+.events-grid-card {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  aspect-ratio: 4 / 3;
+  background: #f0f0f0;
+}
+
+.events-grid-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.4s ease;
+}
+
+.events-grid-card:hover .events-grid-image {
+  transform: scale(1.04);
+}
+
+.events-grid-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.65) 0%, transparent 100%);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  box-sizing: border-box;
+}
+
+.events-grid-title {
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.2;
+}
+
+.events-grid-date,
+.events-grid-author {
+  font-size: 0.75rem;
+  opacity: 0.85;
+}
+
+@media (max-width: 600px) {
+  .events-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===== EVENT POST ===== */
+.post-cover {
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.post-cover img {
+  display: block;
+  width: 100%;
+  max-height: 60vh;
+  object-fit: cover;
+  object-position: center;
+}
