@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Événements — PLAYGROUND</title>
+  <title>PLAYGROUND</title>
   <link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
@@ -64,54 +64,41 @@
   <audio id="background-audio" src="/assets/audio/song2.mp3" loop></audio>
 
   <main class="main-content">
-    <div class="news-listing">
-
-  <div id="content-fr" class="language-content">
-    <h2 class="page-heading">Événements</h2>
-  </div>
-  <div id="content-en" class="language-content">
-    <h2 class="page-heading">Events</h2>
-  </div>
+    <article class="news-post">
 
   
-    <ul class="events-grid">
-      
-        <li class="events-grid-item">
-          <a href="/events/2026-05-04-welcome/" data-nav-link class="events-grid-card">
-            
-              <img src="/assets/images/background.png" alt="" class="events-grid-image" />
-            
-            <div class="events-grid-overlay">
-              <span data-lang="fr" class="language-content events-grid-title">Bienvenue sur PLAYGROUND</span>
-              <span data-lang="en" class="language-content events-grid-title">Welcome to PLAYGROUND</span>
-              <time class="events-grid-date" datetime="2026-05-04">4 May 2026</time>
-              
-                <span class="events-grid-author">L&#39;équipe PLAYGROUND</span>
-              
-            </div>
-          </a>
-        </li>
-      
-        <li class="events-grid-item">
-          <a href="/events/2026-05-04-ebe7bddf4087/" data-nav-link class="events-grid-card">
-            
-              <img src="/assets/images/red.jpg" alt="" class="events-grid-image" />
-            
-            <div class="events-grid-overlay">
-              <span data-lang="fr" class="language-content events-grid-title">Tester</span>
-              <span data-lang="en" class="language-content events-grid-title">Test</span>
-              <time class="events-grid-date" datetime="2026-05-04">4 May 2026</time>
-              
-                <span class="events-grid-author">Bob S</span>
-              
-            </div>
-          </a>
-        </li>
-      
-    </ul>
+    <div class="post-cover">
+      <img src="/assets/images/red.jpg" alt="Tester" />
+    </div>
   
 
-</div>
+  <header class="post-header">
+    <div id="content-fr" class="language-content">
+      <h2 class="post-title">Tester</h2>
+    </div>
+    <div id="content-en" class="language-content">
+      <h2 class="post-title">Test</h2>
+    </div>
+    <div class="post-meta">
+      <time datetime="2026-05-04">4 May 2026</time>
+      <span class="post-author"> — Bob S</span>
+    </div>
+  </header>
+
+  <div id="content-fr" class="language-content post-body">
+    <p>test in french</p>
+
+  </div>
+  <div id="content-en" class="language-content post-body">
+    <p>test in english</p>
+
+  </div>
+
+  <footer class="post-footer">
+    <a href="/events/" data-nav-link class="back-link">← Events</a>
+  </footer>
+
+</article>
 
   </main>
 
