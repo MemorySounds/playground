@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PLAYGROUND</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+
+  <div class="video-wrapper">
+    <video class="video-bg" autoplay loop muted playsinline>
+      <source src="/assets/video/background-video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </source>
+    </video>
+    <div class="flicker-overlay"></div>
+  </div>
+
+  <!-- Main Navigation Header -->
+  <header class="main-header">
+    <h1 id="playground-title"><a href="/" style="text-decoration:none;color:inherit;">PLAYGROUND</a></h1>
+    <button id="main-menu-toggle" class="main-menu-toggle" aria-label="Open main menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <nav class="main-nav">
+      <ul>
+        <li><a href="/" data-nav-link>Intro</a></li>
+        <li><a href="/presentation/" data-nav-link>Presentation</a></li>
+        <li><a href="/references/" data-nav-link>References</a></li>
+        <li><a href="/archive/" data-nav-link>Archive</a></li>
+        <li><a href="/events/" data-nav-link>Events</a></li>
+        <li><a href="/contact/" data-nav-link>Contact</a></li>
+      </ul>
+      <button id="language-toggle">FRANÇAIS</button>
+    </nav>
+  </header>
+
+  <!-- Right side audio menu -->
+  <div class="right-audio-menu">
+    <div class="audio-player">
+      <button id="audio-toggle" class="audio-btn">
+        <svg id="play-icon" width="16" height="16" viewBox="0 0 16 16" style="display: block;">
+          <polygon points="3,2 13,8 3,14" fill="white"/>
+        </svg>
+        <svg id="stop-icon" width="16" height="16" viewBox="0 0 16 16" style="display: none;">
+          <rect x="3" y="3" width="10" height="10" fill="white"/>
+        </svg>
+      </button>
+      <div id="time-remaining" class="time-display">00:00</div>
+      <input type="range" id="audio-progress" class="audio-progress" min="0" max="100" value="0" step="1">
+    </div>
+  </div>
+
+  <!-- Audio menu toggle (right side burger) -->
+  <button id="audio-menu-toggle" class="audio-menu-toggle" aria-label="Open audio menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <audio id="background-audio" src="/assets/audio/song2.mp3" loop></audio>
+
+  <main class="main-content">
+    
+<div id="content-fr" class="language-content">
+  <div class="greeting-message-fr">
+    <p>Chers amis,</p>
+<p>Vous êtes ici car vous êtes venus, viendrez ou êtes simplement intéressés par les sessions PLAYGROUND.</p>
+<p>Puisque nous tâtonnons dans nos recherches artistiques, il n'est pas toujours évident d'expliquer ce que nous faisons. Ce site web est une tentative de le définir, tout en préservant les zones d'incertitudes inhérentes à toute pratique expérimentale.</p>
+
+  </div>
+  <div class="constitution">
+    <ul class="playground-list">
+      
+        <li><span class="playground">PLAYGROUND</span><span class="desc">est un laboratoire artistique</span></li>
+      
+        <li><span class="playground">PLAYGROUND</span><span class="desc">est une expérimentation sociologique</span></li>
+      
+        <li><span class="playground">PLAYGROUND</span><span class="desc">est une action improductive</span></li>
+      
+        <li><span class="playground">PLAYGROUND</span><span class="desc">n&#39;a pas de but</span></li>
+      
+        <li><span class="playground">PLAYGROUND</span><span class="desc">est.</span></li>
+      
+        <li><span class="playground">PLAYGROUND</span><span class="desc">sont des humains qui se connectent entre eux</span></li>
+      
+        <li><span class="playground">PLAYGROUND</span><span class="desc">c&#39;est prendre son temps</span></li>
+      
+        <li><span class="playground">PLAYGROUND</span><span class="desc">est le temps qui s&#39;étire</span></li>
+      
+        <li><span class="playground">PLAYGROUND</span><span class="desc">est un endroit où on écoute son état intérieur</span></li>
+      
+        <li><span class="playground">PLAYGROUND</span><span class="desc">est un lieu éphémère construit par ses participants</span></li>
+      
+        <li><span class="playground">PLAYGROUND</span><span class="desc">est imprévisible mais organique</span></li>
+      
+        <li><span class="playground">PLAYGROUND</span><span class="desc">est un jeu sans règle</span></li>
+      
+        <li><span class="playground">PLAYGROUND</span><span class="desc">est une situation absurde</span></li>
+      
+        <li><span class="playground">PLAYGROUND</span><span class="desc">ne se prend pas au sérieux</span></li>
+      
+        <li><span class="playground">PLAYGROUND</span><span class="desc">est une quête d&#39;authenticité</span></li>
+      
+        <li><span class="playground">PLAYGROUND</span><span class="desc">est un désir de faire collectif</span></li>
+      
+    </ul>
+  </div>
+</div>
+
+<div id="content-en" class="language-content">
+  <div class="greeting-message">
+    <p>Dear friends,</p>
+<p>You're here because you came to, will come to or are simply interested in PLAYGROUND sessions.</p>
+<p>As we are groping our way through our own artistic research, it is not always easy to explain what we do. This website is an attempt to define it, while preserving the areas of uncertainty inherent in any experimental practice.</p>
+
+  </div>
+  <div class="constitution">
+    <ul class="playground-list">
+      
+        <li><span class="playground">PLAYGROUND</span><span class="desc">is an art experiment</span></li>
+      
+        <li><span class="playground">PLAYGROUND</span><span class="desc">is a sociologic experiment</span></li>
+      
+        <li><span class="playground">PLAYGROUND</span><span class="desc">is an unproductive action</span></li>
+      
+        <li><span class="playground">PLAYGROUND</span><span class="desc">is purposeless</span></li>
+      
+        <li><span class="playground">PLAYGROUND</span><span class="desc">is.</span></li>
+      
+        <li><span class="playground">PLAYGROUND</span><span class="desc">are humans connecting with each others</span></li>
+      
+        <li><span class="playground">PLAYGROUND</span><span class="desc">is about taking your time</span></li>
+      
+        <li><span class="playground">PLAYGROUND</span><span class="desc">is the stretch of time</span></li>
+      
+        <li><span class="playground">PLAYGROUND</span><span class="desc">is where you listen to your inner state</span></li>
+      
+        <li><span class="playground">PLAYGROUND</span><span class="desc">is an ephemeral space built by its participants</span></li>
+      
+        <li><span class="playground">PLAYGROUND</span><span class="desc">is unpredictable but organic</span></li>
+      
+        <li><span class="playground">PLAYGROUND</span><span class="desc">is a game with blurred rules</span></li>
+      
+        <li><span class="playground">PLAYGROUND</span><span class="desc">is an absurd situation</span></li>
+      
+        <li><span class="playground">PLAYGROUND</span><span class="desc">is not taking it seriously</span></li>
+      
+        <li><span class="playground">PLAYGROUND</span><span class="desc">is a quest for authenticity</span></li>
+      
+        <li><span class="playground">PLAYGROUND</span><span class="desc">is a desire for collective actions</span></li>
+      
+    </ul>
+  </div>
+</div>
+
+  </main>
+
+  <script src="/scripts/audio.js"></script>
+  <script>
+    // ── Menu toggle ──────────────────────────────────────────────────────────
+    const mainMenuToggle = document.getElementById('main-menu-toggle');
+    const audioMenuToggle = document.getElementById('audio-menu-toggle');
+    const mainHeader = document.querySelector('.main-header');
+    const rightAudioMenu = document.querySelector('.right-audio-menu');
+    const languageToggle = document.getElementById('language-toggle');
+
+    function closeMenu() {
+      mainHeader.classList.remove('expanded');
+      mainMenuToggle.classList.remove('open');
+      document.body.classList.remove('nav-open');
+    }
+
+    mainMenuToggle.addEventListener('click', () => {
+      mainHeader.classList.toggle('expanded');
+      const isOpen = mainHeader.classList.contains('expanded');
+      document.body.classList.toggle('nav-open', isOpen);
+      mainMenuToggle.classList.toggle('open', isOpen);
+    });
+
+    if (audioMenuToggle) {
+      audioMenuToggle.addEventListener('click', () => {
+        rightAudioMenu.classList.toggle('visible');
+        audioMenuToggle.classList.toggle('open');
+      });
+    }
+
+    // Close menu when a nav link is clicked
+    document.addEventListener('click', (e) => {
+      if (e.target.matches('[data-nav-link]') || e.target.matches('#language-toggle')) {
+        closeMenu();
+      }
+    });
+
+    // Close menu when clicking outside it
+    document.addEventListener('click', (e) => {
+      const navMenu = document.querySelector('.main-nav');
+      if (document.body.classList.contains('nav-open')) {
+        if (!navMenu.contains(e.target) && !mainMenuToggle.contains(e.target)) {
+          closeMenu();
+        } else if (navMenu.contains(e.target) && !e.target.matches('[data-nav-link]')) {
+          closeMenu();
+        }
+      }
+    });
+
+    // ── Language toggle ──────────────────────────────────────────────────────
+    // Re-queries the DOM each call so it works after content swaps.
+    function setLanguage(lang) {
+      const contentFr = document.getElementById('content-fr');
+      const contentEn = document.getElementById('content-en');
+      if (lang === 'en') {
+        if (contentFr) contentFr.style.display = 'none';
+        if (contentEn) contentEn.style.display = 'block';
+        if (languageToggle) languageToggle.textContent = 'FRANÇAIS';
+      } else {
+        if (contentFr) contentFr.style.display = 'block';
+        if (contentEn) contentEn.style.display = 'none';
+        if (languageToggle) languageToggle.textContent = 'ENGLISH';
+      }
+      localStorage.setItem('language', lang);
+    }
+
+    setLanguage(localStorage.getItem('language') || 'fr');
+    initArchiveGate();
+
+    if (languageToggle) {
+      languageToggle.addEventListener('click', () => {
+        setLanguage((localStorage.getItem('language') || 'fr') === 'fr' ? 'en' : 'fr');
+      });
+    }
+
+    // ── Archive password gate ────────────────────────────────────────────────
+    // Inline scripts inside swapped innerHTML don't execute, so the gate logic
+    // lives here in the shell and is re-initialised after every navigation.
+    function initArchiveGate() {
+      const input = document.getElementById('password-input');
+      if (!input) return;
+      const gate = document.getElementById('archive-gate');
+      const content = document.getElementById('archive-content');
+      const error = document.getElementById('password-error');
+      input.addEventListener('keydown', (e) => {
+        if (e.key !== 'Enter') return;
+        if (input.value === gate.dataset.password) {
+          gate.style.display = 'none';
+          content.style.display = 'block';
+        } else {
+          if (error) error.style.display = 'block';
+          input.value = '';
+        }
+      });
+    }
+
+    // ── Fetch navigation (keeps audio alive across pages) ────────────────────
+    // Intercepts nav-link clicks, fetches the target, swaps only <main> content,
+    // and updates the URL — the audio element in the shell is never destroyed.
+    async function navigateTo(url) {
+      try {
+        const res = await fetch(url);
+        if (!res.ok) { window.location.href = url; return; }
+        const doc = new DOMParser().parseFromString(await res.text(), 'text/html');
+        const newMain = doc.querySelector('main.main-content');
+        const currentMain = document.querySelector('main.main-content');
+        if (newMain && currentMain) currentMain.innerHTML = newMain.innerHTML;
+        document.title = doc.title;
+        setLanguage(localStorage.getItem('language') || 'fr');
+        initArchiveGate();
+      } catch (_) {
+        window.location.href = url;
+      }
+    }
+
+    document.addEventListener('click', (e) => {
+      const link = e.target.closest('[data-nav-link]');
+      if (!link) return;
+      const href = link.getAttribute('href');
+      if (!href || href.startsWith('http') || href.startsWith('//')) return;
+      e.preventDefault();
+      if (href === window.location.pathname) return;
+      history.pushState(null, '', href);
+      navigateTo(href);
+    });
+
+    window.addEventListener('popstate', () => {
+      navigateTo(window.location.pathname || '/');
+    });
+  </script>
+
+</body>
+</html>

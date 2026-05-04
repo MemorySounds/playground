@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Archive — PLAYGROUND</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+
+  <div class="video-wrapper">
+    <video class="video-bg" autoplay loop muted playsinline>
+      <source src="/assets/video/background-video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </source>
+    </video>
+    <div class="flicker-overlay"></div>
+  </div>
+
+  <!-- Main Navigation Header -->
+  <header class="main-header">
+    <h1 id="playground-title"><a href="/" style="text-decoration:none;color:inherit;">PLAYGROUND</a></h1>
+    <button id="main-menu-toggle" class="main-menu-toggle" aria-label="Open main menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <nav class="main-nav">
+      <ul>
+        <li><a href="/" data-nav-link>Intro</a></li>
+        <li><a href="/presentation/" data-nav-link>Presentation</a></li>
+        <li><a href="/references/" data-nav-link>References</a></li>
+        <li><a href="/archive/" data-nav-link>Archive</a></li>
+        <li><a href="/events/" data-nav-link>Events</a></li>
+        <li><a href="/contact/" data-nav-link>Contact</a></li>
+      </ul>
+      <button id="language-toggle">FRANÇAIS</button>
+    </nav>
+  </header>
+
+  <!-- Right side audio menu -->
+  <div class="right-audio-menu">
+    <div class="audio-player">
+      <button id="audio-toggle" class="audio-btn">
+        <svg id="play-icon" width="16" height="16" viewBox="0 0 16 16" style="display: block;">
+          <polygon points="3,2 13,8 3,14" fill="white"/>
+        </svg>
+        <svg id="stop-icon" width="16" height="16" viewBox="0 0 16 16" style="display: none;">
+          <rect x="3" y="3" width="10" height="10" fill="white"/>
+        </svg>
+      </button>
+      <div id="time-remaining" class="time-display">00:00</div>
+      <input type="range" id="audio-progress" class="audio-progress" min="0" max="100" value="0" step="1">
+    </div>
+  </div>
+
+  <!-- Audio menu toggle (right side burger) -->
+  <button id="audio-menu-toggle" class="audio-menu-toggle" aria-label="Open audio menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <audio id="background-audio" src="/assets/audio/song2.mp3" loop></audio>
+
+  <main class="main-content">
+    <div id="archive-gate" data-password="playground">
+  <p>MOT DE PASSE / PASSWORD :</p>
+  <input type="password" id="password-input" autocomplete="off" />
+  <p id="password-error" style="display:none;">Incorrect / Wrong password.</p>
+</div>
+<div id="archive-content" style="display:none;">
+  <div id="content-fr" class="language-content">
+    <p>Bienvenue dans les archives secrètes.</p>
+<p><em>Contenu à venir...</em></p>
+
+  </div>
+  <div id="content-en" class="language-content">
+    <p>Welcome to the secret archive.</p>
+<p><em>Content coming soon...</em></p>
+
+  </div>
+</div>
+
+  </main>
+
+  <script src="/scripts/audio.js"></script>
+  <script>
+    // ── Menu toggle ──────────────────────────────────────────────────────────
+    const mainMenuToggle = document.getElementById('main-menu-toggle');
+    const audioMenuToggle = document.getElementById('audio-menu-toggle');
+    const mainHeader = document.querySelector('.main-header');
+    const rightAudioMenu = document.querySelector('.right-audio-menu');
+    const languageToggle = document.getElementById('language-toggle');
+
+    function closeMenu() {
+      mainHeader.classList.remove('expanded');
+      mainMenuToggle.classList.remove('open');
+      document.body.classList.remove('nav-open');
+    }
+
+    mainMenuToggle.addEventListener('click', () => {
+      mainHeader.classList.toggle('expanded');
+      const isOpen = mainHeader.classList.contains('expanded');
+      document.body.classList.toggle('nav-open', isOpen);
+      mainMenuToggle.classList.toggle('open', isOpen);
+    });
+
+    if (audioMenuToggle) {
+      audioMenuToggle.addEventListener('click', () => {
+        rightAudioMenu.classList.toggle('visible');
+        audioMenuToggle.classList.toggle('open');
+      });
+    }
+
+    // Close menu when a nav link is clicked
+    document.addEventListener('click', (e) => {
+      if (e.target.matches('[data-nav-link]') || e.target.matches('#language-toggle')) {
+        closeMenu();
+      }
+    });
+
+    // Close menu when clicking outside it
+    document.addEventListener('click', (e) => {
+      const navMenu = document.querySelector('.main-nav');
+      if (document.body.classList.contains('nav-open')) {
+        if (!navMenu.contains(e.target) && !mainMenuToggle.contains(e.target)) {
+          closeMenu();
+        } else if (navMenu.contains(e.target) && !e.target.matches('[data-nav-link]')) {
+          closeMenu();
+        }
+      }
+    });
+
+    // ── Language toggle ──────────────────────────────────────────────────────
+    // Re-queries the DOM each call so it works after content swaps.
+    function setLanguage(lang) {
+      const contentFr = document.getElementById('content-fr');
+      const contentEn = document.getElementById('content-en');
+      if (lang === 'en') {
+        if (contentFr) contentFr.style.display = 'none';
+        if (contentEn) contentEn.style.display = 'block';
+        if (languageToggle) languageToggle.textContent = 'FRANÇAIS';
+      } else {
+        if (contentFr) contentFr.style.display = 'block';
+        if (contentEn) contentEn.style.display = 'none';
+        if (languageToggle) languageToggle.textContent = 'ENGLISH';
+      }
+      localStorage.setItem('language', lang);
+    }
+
+    setLanguage(localStorage.getItem('language') || 'fr');
+    initArchiveGate();
+
+    if (languageToggle) {
+      languageToggle.addEventListener('click', () => {
+        setLanguage((localStorage.getItem('language') || 'fr') === 'fr' ? 'en' : 'fr');
+      });
+    }
+
+    // ── Archive password gate ────────────────────────────────────────────────
+    // Inline scripts inside swapped innerHTML don't execute, so the gate logic
+    // lives here in the shell and is re-initialised after every navigation.
+    function initArchiveGate() {
+      const input = document.getElementById('password-input');
+      if (!input) return;
+      const gate = document.getElementById('archive-gate');
+      const content = document.getElementById('archive-content');
+      const error = document.getElementById('password-error');
+      input.addEventListener('keydown', (e) => {
+        if (e.key !== 'Enter') return;
+        if (input.value === gate.dataset.password) {
+          gate.style.display = 'none';
+          content.style.display = 'block';
+        } else {
+          if (error) error.style.display = 'block';
+          input.value = '';
+        }
+      });
+    }
+
+    // ── Fetch navigation (keeps audio alive across pages) ────────────────────
+    // Intercepts nav-link clicks, fetches the target, swaps only <main> content,
+    // and updates the URL — the audio element in the shell is never destroyed.
+    async function navigateTo(url) {
+      try {
+        const res = await fetch(url);
+        if (!res.ok) { window.location.href = url; return; }
+        const doc = new DOMParser().parseFromString(await res.text(), 'text/html');
+        const newMain = doc.querySelector('main.main-content');
+        const currentMain = document.querySelector('main.main-content');
+        if (newMain && currentMain) currentMain.innerHTML = newMain.innerHTML;
+        document.title = doc.title;
+        setLanguage(localStorage.getItem('language') || 'fr');
+        initArchiveGate();
+      } catch (_) {
+        window.location.href = url;
+      }
+    }
+
+    document.addEventListener('click', (e) => {
+      const link = e.target.closest('[data-nav-link]');
+      if (!link) return;
+      const href = link.getAttribute('href');
+      if (!href || href.startsWith('http') || href.startsWith('//')) return;
+      e.preventDefault();
+      if (href === window.location.pathname) return;
+      history.pushState(null, '', href);
+      navigateTo(href);
+    });
+
+    window.addEventListener('popstate', () => {
+      navigateTo(window.location.pathname || '/');
+    });
+  </script>
+
+</body>
+</html>
