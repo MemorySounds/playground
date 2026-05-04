@@ -1,0 +1,121 @@
+backend:
+  name: github
+  repo: MemorySounds/playground
+  branch: main
+
+# Media uploaded via the CMS goes here; public URL prefix for generated markdown
+media_folder: assets/images
+public_folder: /assets/images
+
+collections:
+  # ── Static pages ──────────────────────────────────────────────────────────
+  - name: pages
+    label: Pages
+    files:
+      - name: home
+        label: 'Home — Intro'
+        file: src/_data/home.yml
+        fields:
+          - label: "Message d'accueil (FR)"
+            name: greeting_fr
+            widget: markdown
+          - label: 'Greeting (EN)'
+            name: greeting_en
+            widget: markdown
+          - label: 'Constitution PLAYGROUND'
+            name: constitution
+            widget: list
+            fields:
+              - { label: 'Français', name: fr, widget: string }
+              - { label: 'English', name: en, widget: string }
+
+      - name: presentation
+        label: Présentation / Presentation
+        file: src/_data/presentation.yml
+        fields:
+          - label: 'Contenu (FR)'
+            name: body_fr
+            widget: markdown
+          - label: 'Content (EN)'
+            name: body_en
+            widget: markdown
+
+      - name: references
+        label: Références / References
+        file: src/_data/references.yml
+        fields:
+          - label: 'Contenu (FR)'
+            name: body_fr
+            widget: markdown
+          - label: 'Content (EN)'
+            name: body_en
+            widget: markdown
+
+      - name: contact
+        label: Contact
+        file: src/_data/contact.yml
+        fields:
+          - label: 'Contenu (FR)'
+            name: body_fr
+            widget: markdown
+          - label: 'Content (EN)'
+            name: body_en
+            widget: markdown
+
+      - name: archive
+        label: Archive
+        file: src/_data/archive.yml
+        fields:
+          - label: 'Mot de passe / Password'
+            name: password
+            widget: string
+            hint: >
+              Visible in page source — security theatre only, not cryptographically secure.
+          - label: 'Contenu (FR)'
+            name: body_fr
+            widget: markdown
+          - label: 'Content (EN)'
+            name: body_en
+            widget: markdown
+
+  # ── Events (blog-like posts) ───────────────────────────────────────────────
+  - name: events
+    label: 'Événements / Events'
+    folder: src/events
+    create: true
+    slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
+    fields:
+      - label: Layout
+        name: layout
+        widget: hidden
+        default: post.njk
+      - label: 'Titre (FR)'
+        name: title_fr
+        widget: string
+      - label: 'Title (EN)'
+        name: title_en
+        widget: string
+      - label: Date
+        name: date
+        widget: datetime
+        date_format: 'YYYY-MM-DD'
+        time_format: false
+        picker_utc: true
+      - label: 'Auteur / Author'
+        name: author
+        widget: string
+        required: false
+      - label: 'Image de couverture / Cover image'
+        name: cover_image
+        widget: image
+        required: false
+      - label: Tags
+        name: tags
+        widget: hidden
+        default: [events]
+      - label: 'Contenu (FR)'
+        name: body_fr
+        widget: markdown
+      - label: 'Content (EN)'
+        name: body_en
+        widget: markdown
