@@ -2,6 +2,8 @@
 
 A very basic website (vanilla JS, HTML, CSS) to host the content of the PLAYGROUND sessions. It's an evolving project with plenty of experimentation, so please expect short-cuts; the use-case isn't very formal so does it need to be very strict.
 
+Check it here: https://playyground.art/
+
 ## How to Develop Locally
 
 1. **Clone the Repository**
