@@ -2,4 +2,29 @@
 layout: base.njk
 title: PLAYGROUND
 ---
-<p style="color:white;padding:2rem;">Phase 2 scaffold working — content migration coming in Phase 3.</p>
+
+<div id="content-fr" class="language-content">
+  <div class="greeting-message-fr">
+    {{ home.greeting_fr | markdownify | safe }}
+  </div>
+  <div class="constitution">
+    <ul class="playground-list">
+      {% for item in home.constitution %}
+        <li><span class="playground">PLAYGROUND</span><span class="desc">{{ item.fr }}</span></li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+
+<div id="content-en" class="language-content">
+  <div class="greeting-message">
+    {{ home.greeting_en | markdownify | safe }}
+  </div>
+  <div class="constitution">
+    <ul class="playground-list">
+      {% for item in home.constitution %}
+        <li><span class="playground">PLAYGROUND</span><span class="desc">{{ item.en }}</span></li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
