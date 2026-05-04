@@ -12,26 +12,22 @@ title: Événements — PLAYGROUND
   </div>
 
   {% if collections.events.length %}
-    <ul class="news-list">
+    <ul class="events-grid">
       {% for post in collections.events %}
-        <li class="news-item">
-          {% if post.data.cover_image %}
-            <a href="{{ post.url }}" data-nav-link class="news-cover-link">
-              <img src="{{ post.data.cover_image }}" alt="" class="news-cover-thumb" />
-            </a>
-          {% endif %}
-          <div class="news-item-body">
-            <time class="news-date" datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate }}</time>
-            <div id="content-fr" class="language-content">
-              <a href="{{ post.url }}" data-nav-link class="news-title">{{ post.data.title_fr or post.data.title }}</a>
-            </div>
-            <div id="content-en" class="language-content">
-              <a href="{{ post.url }}" data-nav-link class="news-title">{{ post.data.title_en or post.data.title }}</a>
-            </div>
-            {% if post.data.author %}
-              <span class="news-author">{{ post.data.author }}</span>
+        <li class="events-grid-item">
+          <a href="{{ post.url }}" data-nav-link class="events-grid-card">
+            {% if post.data.cover_image %}
+              <img src="{{ post.data.cover_image }}" alt="" class="events-grid-image" />
             {% endif %}
-          </div>
+            <div class="events-grid-overlay">
+              <span data-lang="fr" class="language-content events-grid-title">{{ post.data.title_fr or post.data.title }}</span>
+              <span data-lang="en" class="language-content events-grid-title">{{ post.data.title_en or post.data.title }}</span>
+              <time class="events-grid-date" datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate }}</time>
+              {% if post.data.author %}
+                <span class="events-grid-author">{{ post.data.author }}</span>
+              {% endif %}
+            </div>
+          </a>
         </li>
       {% endfor %}
     </ul>
