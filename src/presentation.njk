@@ -1,0 +1,12 @@
+---
+layout: base.njk
+title: Presentation — PLAYGROUND
+---
+
+<div id="content-fr">
+  {{ presentation.body_fr | markdownify | safe }}
+</div>
+
+<div id="content-en">
+  {{ presentation.body_en | markdownify | safe }}
+</div>
