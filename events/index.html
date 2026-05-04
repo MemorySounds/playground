@@ -74,26 +74,22 @@
   </div>
 
   
-    <ul class="news-list">
+    <ul class="events-grid">
       
-        <li class="news-item">
-          
-            <a href="/events/2026-05-04-welcome/" data-nav-link class="news-cover-link">
-              <img src="/assets/images/welcome.jpg" alt="" class="news-cover-thumb" />
-            </a>
-          
-          <div class="news-item-body">
-            <time class="news-date" datetime="2026-05-04">4 May 2026</time>
-            <div id="content-fr" class="language-content">
-              <a href="/events/2026-05-04-welcome/" data-nav-link class="news-title">Bienvenue sur PLAYGROUND</a>
-            </div>
-            <div id="content-en" class="language-content">
-              <a href="/events/2026-05-04-welcome/" data-nav-link class="news-title">Welcome to PLAYGROUND</a>
-            </div>
+        <li class="events-grid-item">
+          <a href="/events/2026-05-04-welcome/" data-nav-link class="events-grid-card">
             
-              <span class="news-author">L&#39;équipe PLAYGROUND</span>
+              <img src="/assets/images/welcome.jpg" alt="" class="events-grid-image" />
             
-          </div>
+            <div class="events-grid-overlay">
+              <span data-lang="fr" class="language-content events-grid-title">Bienvenue sur PLAYGROUND</span>
+              <span data-lang="en" class="language-content events-grid-title">Welcome to PLAYGROUND</span>
+              <time class="events-grid-date" datetime="2026-05-04">4 May 2026</time>
+              
+                <span class="events-grid-author">L&#39;équipe PLAYGROUND</span>
+              
+            </div>
+          </a>
         </li>
       
     </ul>
@@ -152,19 +148,20 @@
     });
 
     // ── Language toggle ──────────────────────────────────────────────────────
-    // Re-queries the DOM each call so it works after content swaps.
+    // Handles two patterns:
+    //  1. id="content-fr" / id="content-en"  — single block per page (most pages)
+    //  2. data-lang="fr" / data-lang="en"    — repeated elements (events cards, etc.)
     function setLanguage(lang) {
+      // Pattern 1 — single blocks
       const contentFr = document.getElementById('content-fr');
       const contentEn = document.getElementById('content-en');
-      if (lang === 'en') {
-        if (contentFr) contentFr.style.display = 'none';
-        if (contentEn) contentEn.style.display = 'block';
-        if (languageToggle) languageToggle.textContent = 'FRANÇAIS';
-      } else {
-        if (contentFr) contentFr.style.display = 'block';
-        if (contentEn) contentEn.style.display = 'none';
-        if (languageToggle) languageToggle.textContent = 'ENGLISH';
-      }
+      if (contentFr) contentFr.style.display = lang === 'fr' ? 'block' : 'none';
+      if (contentEn) contentEn.style.display = lang === 'en' ? 'block' : 'none';
+      // Pattern 2 — repeated blocks (querySelectorAll handles any number)
+      document.querySelectorAll('[data-lang]').forEach(el => {
+        el.style.display = el.dataset.lang === lang ? 'block' : 'none';
+      });
+      if (languageToggle) languageToggle.textContent = lang === 'en' ? 'FRANÇAIS' : 'ENGLISH';
       localStorage.setItem('language', lang);
     }
 

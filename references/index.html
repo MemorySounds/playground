@@ -124,19 +124,20 @@
     });
 
     // ── Language toggle ──────────────────────────────────────────────────────
-    // Re-queries the DOM each call so it works after content swaps.
+    // Handles two patterns:
+    //  1. id="content-fr" / id="content-en"  — single block per page (most pages)
+    //  2. data-lang="fr" / data-lang="en"    — repeated elements (events cards, etc.)
     function setLanguage(lang) {
+      // Pattern 1 — single blocks
       const contentFr = document.getElementById('content-fr');
       const contentEn = document.getElementById('content-en');
-      if (lang === 'en') {
-        if (contentFr) contentFr.style.display = 'none';
-        if (contentEn) contentEn.style.display = 'block';
-        if (languageToggle) languageToggle.textContent = 'FRANÇAIS';
-      } else {
-        if (contentFr) contentFr.style.display = 'block';
-        if (contentEn) contentEn.style.display = 'none';
-        if (languageToggle) languageToggle.textContent = 'ENGLISH';
-      }
+      if (contentFr) contentFr.style.display = lang === 'fr' ? 'block' : 'none';
+      if (contentEn) contentEn.style.display = lang === 'en' ? 'block' : 'none';
+      // Pattern 2 — repeated blocks (querySelectorAll handles any number)
+      document.querySelectorAll('[data-lang]').forEach(el => {
+        el.style.display = el.dataset.lang === lang ? 'block' : 'none';
+      });
+      if (languageToggle) languageToggle.textContent = lang === 'en' ? 'FRANÇAIS' : 'ENGLISH';
       localStorage.setItem('language', lang);
     }
 
