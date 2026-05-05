@@ -42,7 +42,6 @@ body {
 
 .main-header {
   box-sizing: border-box;
-  border-bottom: 1.5px solid $dark-grey;
   padding: 1rem 0 0.5rem;
   display: flex;
   flex-direction: column-reverse;
@@ -62,13 +61,10 @@ body {
     color: $white;
     text-align: center;
   }
-
-  &.expanded .main-nav {
-    transform: translateX(0);
-  }
 }
 
 .main-menu-toggle {
+  display: none; // hidden on desktop; shown on mobile
   position: fixed;
   top: 2rem;
   right: 1.5rem;
@@ -77,7 +73,6 @@ body {
   border: none;
   width: 30px;
   height: 30px;
-  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -109,7 +104,7 @@ body {
 
 #language-toggle {
   display: block;
-  margin: 2rem auto 0;
+  margin: 0 0 0 2rem;
   background: none;
   border: 1px solid $black;
   padding: 0.4rem 0.8rem;
@@ -119,6 +114,7 @@ body {
   font-family: inherit;
   font-weight: 500;
   color: $black;
+  white-space: nowrap;
 
   &:hover {
     background: $black;
@@ -126,42 +122,38 @@ body {
   }
 }
 
+// Desktop: horizontal nav bar below the video — sticks once scrolled into view
 .main-nav {
-  position: fixed;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
   justify-content: center;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  box-sizing: border-box;
   background-color: $white;
-  transform: translateX(100vw);
-  transition: transform 0.5s ease-in-out;
-  padding: 2rem;
-  overflow-y: auto;
-  z-index: 10;
+  border-bottom: 1.5px solid $dark-grey;
+  padding: 1.5rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  width: calc(100vw - 95px); // stops exactly at the audio panel's left border
 
   ul {
     list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
   }
 
   ul li a {
-    width: 100vw;
-    font-size: 2rem !important;
+    font-size: 0.9rem !important;
     display: inline-block;
     text-decoration: none;
     color: $black;
-    font-weight: 900;
-    padding: 0.5rem 1rem;
-    text-align: center;
+    font-weight: 700;
+    padding: 0.4rem 0.9rem;
     -webkit-tap-highlight-color: transparent;
+    letter-spacing: 0.02em;
 
     &:hover {
       background-color: $black;
@@ -178,20 +170,56 @@ body {
   .main-header h1 {
     margin-bottom: 0.3rem;
   }
+
+  // Show burger on mobile
   .main-menu-toggle {
+    display: flex;
     padding: 0 50px;
   }
 
-  .main-nav ul li a {
-    &:hover {
-      background-color: transparent;
-      color: $black;
+  // Mobile: full-screen overlay nav
+  .main-nav {
+    position: fixed;
+    flex-direction: column;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    box-sizing: border-box;
+    background-color: $white;
+    transform: translateX(100vw);
+    transition: transform 0.5s ease-in-out;
+    padding: 2rem;
+    overflow-y: auto;
+    z-index: 10;
+    border-bottom: none;
+
+    &.open {
+      transform: translateX(0);
+    }
+
+    ul {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    ul li a {
+      width: 100vw;
+      font-size: 2rem !important;
+      text-align: center;
+      padding: 0.5rem 1rem;
+
+      &:hover {
+        background-color: transparent;
+        color: $black;
+      }
     }
   }
 
   #language-toggle {
     font-size: 0.7rem;
     padding: 0.3rem 0.6rem;
-    margin-top: 1.2rem;
+    margin: 1.2rem auto 0;
   }
 }
