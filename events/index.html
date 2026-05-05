@@ -25,18 +25,20 @@
       <span></span>
       <span></span>
     </button>
-    <nav class="main-nav">
-      <ul>
-        <li><a href="/" data-nav-link>Intro</a></li>
-        <li><a href="/presentation/" data-nav-link>Presentation</a></li>
-        <li><a href="/references/" data-nav-link>References</a></li>
-        <li><a href="/archive/" data-nav-link>Archive</a></li>
-        <li><a href="/events/" data-nav-link>Events</a></li>
-        <li><a href="/contact/" data-nav-link>Contact</a></li>
-      </ul>
-      <button id="language-toggle">FRANÇAIS</button>
-    </nav>
   </header>
+
+  <!-- Nav bar (horizontal on desktop, slide-in overlay on mobile) -->
+  <nav class="main-nav">
+    <ul>
+      <li><a href="/" data-nav-link>Intro</a></li>
+      <li><a href="/presentation/" data-nav-link>Presentation</a></li>
+      <li><a href="/references/" data-nav-link>References</a></li>
+      <li><a href="/archive/" data-nav-link>Archive</a></li>
+      <li><a href="/events/" data-nav-link>Events</a></li>
+      <li><a href="/contact/" data-nav-link>Contact</a></li>
+    </ul>
+    <button id="language-toggle">FRANÇAIS</button>
+  </nav>
 
   <!-- Right side audio menu -->
   <div class="right-audio-menu">
@@ -67,10 +69,14 @@
     <div class="news-listing">
 
   <div id="content-fr" class="language-content">
-    <h2 class="page-heading">Événements</h2>
+    <h1>Événements</h1>
+<p>Bienvenue sur la page des événements ! Ajoutez ici du texte en <strong>markdown</strong> pour une intro, une description, etc.</p>
+
   </div>
   <div id="content-en" class="language-content">
-    <h2 class="page-heading">Events</h2>
+    <h1>Events</h1>
+<p>Welcome to the events page! Add any text you want here, using <strong>markdown</strong> for formatting, links, etc.</p>
+
   </div>
 
   
@@ -78,33 +84,65 @@
       
         <li class="events-grid-item">
           <a href="/events/2026-05-04-welcome/" data-nav-link class="events-grid-card">
+
             
-              <img src="/assets/images/background.png" alt="" class="events-grid-image" />
-            
-            <div class="events-grid-overlay">
-              <span data-lang="fr" class="language-content events-grid-title">Bienvenue sur PLAYGROUND</span>
-              <span data-lang="en" class="language-content events-grid-title">Welcome to PLAYGROUND</span>
-              <time class="events-grid-date" datetime="2026-05-04">4 May 2026</time>
-              
-                <span class="events-grid-author">L&#39;équipe PLAYGROUND</span>
-              
+            <div class="card-default">
+              <div class="card-img-wrap">
+                
+                  <img src="/assets/images/background.png" alt="" class="card-primary-img" />
+                
+              </div>
+              <div class="card-info">
+                <span data-lang="fr" class="language-content events-grid-title">Bienvenue sur PLAYGROUND</span>
+                <span data-lang="en" class="language-content events-grid-title">Welcome to PLAYGROUND</span>
+              </div>
             </div>
+
+            
+            <div class="card-hover-face">
+              
+                <img src="/assets/images/background.png" alt="" class="card-hover-img" />
+              
+              <div class="card-meta">
+                <time class="events-grid-date" datetime="2026-05-04">4 May 2026</time>
+                
+                  <span class="events-grid-author">L&#39;équipe PLAYGROUND</span>
+                
+              </div>
+            </div>
+
           </a>
         </li>
       
         <li class="events-grid-item">
           <a href="/events/2026-05-04-ebe7bddf4087/" data-nav-link class="events-grid-card">
+
             
-              <img src="/assets/images/red.jpg" alt="" class="events-grid-image" />
-            
-            <div class="events-grid-overlay">
-              <span data-lang="fr" class="language-content events-grid-title">Tester</span>
-              <span data-lang="en" class="language-content events-grid-title">Test</span>
-              <time class="events-grid-date" datetime="2026-05-04">4 May 2026</time>
-              
-                <span class="events-grid-author">Bob S</span>
-              
+            <div class="card-default">
+              <div class="card-img-wrap">
+                
+                  <img src="/assets/images/red.jpg" alt="" class="card-primary-img" />
+                
+              </div>
+              <div class="card-info">
+                <span data-lang="fr" class="language-content events-grid-title">Tester</span>
+                <span data-lang="en" class="language-content events-grid-title">Test</span>
+              </div>
             </div>
+
+            
+            <div class="card-hover-face">
+              
+                <img src="/assets/images/red.jpg" alt="" class="card-hover-img" />
+              
+              <div class="card-meta">
+                <time class="events-grid-date" datetime="2026-05-04">4 May 2026</time>
+                
+                  <span class="events-grid-author">Bob S</span>
+                
+              </div>
+            </div>
+
           </a>
         </li>
       
@@ -120,26 +158,26 @@
     // ── Menu toggle ──────────────────────────────────────────────────────────
     const mainMenuToggle = document.getElementById('main-menu-toggle');
     const audioMenuToggle = document.getElementById('audio-menu-toggle');
-    const mainHeader = document.querySelector('.main-header');
+    const mainNav = document.querySelector('.main-nav');
     const rightAudioMenu = document.querySelector('.right-audio-menu');
     const languageToggle = document.getElementById('language-toggle');
 
     function closeMenu() {
-      mainHeader.classList.remove('expanded');
+      mainNav.classList.remove('open');
       mainMenuToggle.classList.remove('open');
       document.body.classList.remove('nav-open');
     }
 
     mainMenuToggle.addEventListener('click', () => {
-      mainHeader.classList.toggle('expanded');
-      const isOpen = mainHeader.classList.contains('expanded');
+      mainNav.classList.toggle('open');
+      const isOpen = mainNav.classList.contains('open');
       document.body.classList.toggle('nav-open', isOpen);
       mainMenuToggle.classList.toggle('open', isOpen);
     });
 
     if (audioMenuToggle) {
       audioMenuToggle.addEventListener('click', () => {
-        rightAudioMenu.classList.toggle('visible');
+        rightAudioMenu.classList.toggle('open');
         audioMenuToggle.classList.toggle('open');
       });
     }
@@ -153,11 +191,10 @@
 
     // Close menu when clicking outside it
     document.addEventListener('click', (e) => {
-      const navMenu = document.querySelector('.main-nav');
       if (document.body.classList.contains('nav-open')) {
-        if (!navMenu.contains(e.target) && !mainMenuToggle.contains(e.target)) {
+        if (!mainNav.contains(e.target) && !mainMenuToggle.contains(e.target)) {
           closeMenu();
-        } else if (navMenu.contains(e.target) && !e.target.matches('[data-nav-link]')) {
+        } else if (mainNav.contains(e.target) && !e.target.matches('[data-nav-link]')) {
           closeMenu();
         }
       }

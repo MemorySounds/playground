@@ -25,18 +25,20 @@
       <span></span>
       <span></span>
     </button>
-    <nav class="main-nav">
-      <ul>
-        <li><a href="/" data-nav-link>Intro</a></li>
-        <li><a href="/presentation/" data-nav-link>Presentation</a></li>
-        <li><a href="/references/" data-nav-link>References</a></li>
-        <li><a href="/archive/" data-nav-link>Archive</a></li>
-        <li><a href="/events/" data-nav-link>Events</a></li>
-        <li><a href="/contact/" data-nav-link>Contact</a></li>
-      </ul>
-      <button id="language-toggle">FRANÇAIS</button>
-    </nav>
   </header>
+
+  <!-- Nav bar (horizontal on desktop, slide-in overlay on mobile) -->
+  <nav class="main-nav">
+    <ul>
+      <li><a href="/" data-nav-link>Intro</a></li>
+      <li><a href="/presentation/" data-nav-link>Presentation</a></li>
+      <li><a href="/references/" data-nav-link>References</a></li>
+      <li><a href="/archive/" data-nav-link>Archive</a></li>
+      <li><a href="/events/" data-nav-link>Events</a></li>
+      <li><a href="/contact/" data-nav-link>Contact</a></li>
+    </ul>
+    <button id="language-toggle">FRANÇAIS</button>
+  </nav>
 
   <!-- Right side audio menu -->
   <div class="right-audio-menu">
@@ -80,26 +82,26 @@
     // ── Menu toggle ──────────────────────────────────────────────────────────
     const mainMenuToggle = document.getElementById('main-menu-toggle');
     const audioMenuToggle = document.getElementById('audio-menu-toggle');
-    const mainHeader = document.querySelector('.main-header');
+    const mainNav = document.querySelector('.main-nav');
     const rightAudioMenu = document.querySelector('.right-audio-menu');
     const languageToggle = document.getElementById('language-toggle');
 
     function closeMenu() {
-      mainHeader.classList.remove('expanded');
+      mainNav.classList.remove('open');
       mainMenuToggle.classList.remove('open');
       document.body.classList.remove('nav-open');
     }
 
     mainMenuToggle.addEventListener('click', () => {
-      mainHeader.classList.toggle('expanded');
-      const isOpen = mainHeader.classList.contains('expanded');
+      mainNav.classList.toggle('open');
+      const isOpen = mainNav.classList.contains('open');
       document.body.classList.toggle('nav-open', isOpen);
       mainMenuToggle.classList.toggle('open', isOpen);
     });
 
     if (audioMenuToggle) {
       audioMenuToggle.addEventListener('click', () => {
-        rightAudioMenu.classList.toggle('visible');
+        rightAudioMenu.classList.toggle('open');
         audioMenuToggle.classList.toggle('open');
       });
     }
@@ -113,11 +115,10 @@
 
     // Close menu when clicking outside it
     document.addEventListener('click', (e) => {
-      const navMenu = document.querySelector('.main-nav');
       if (document.body.classList.contains('nav-open')) {
-        if (!navMenu.contains(e.target) && !mainMenuToggle.contains(e.target)) {
+        if (!mainNav.contains(e.target) && !mainMenuToggle.contains(e.target)) {
           closeMenu();
-        } else if (navMenu.contains(e.target) && !e.target.matches('[data-nav-link]')) {
+        } else if (mainNav.contains(e.target) && !e.target.matches('[data-nav-link]')) {
           closeMenu();
         }
       }
