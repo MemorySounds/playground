@@ -5,10 +5,10 @@ title: Événements — PLAYGROUND
 <div class="news-listing">
 
   <div id="content-fr" class="language-content">
-    <h2 class="page-heading">Événements</h2>
+    <h2 class="page-heading">{{ events_page.heading_fr }}</h2>
   </div>
   <div id="content-en" class="language-content">
-    <h2 class="page-heading">Events</h2>
+    <h2 class="page-heading">{{ events_page.heading_en }}</h2>
   </div>
 
   {% if collections.events.length %}
@@ -16,17 +16,35 @@ title: Événements — PLAYGROUND
       {% for post in collections.events %}
         <li class="events-grid-item">
           <a href="{{ post.url }}" data-nav-link class="events-grid-card">
-            {% if post.data.cover_image %}
-              <img src="{{ post.data.cover_image }}" alt="" class="events-grid-image" />
-            {% endif %}
-            <div class="events-grid-overlay">
-              <span data-lang="fr" class="language-content events-grid-title">{{ post.data.title_fr or post.data.title }}</span>
-              <span data-lang="en" class="language-content events-grid-title">{{ post.data.title_en or post.data.title }}</span>
-              <time class="events-grid-date" datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate }}</time>
-              {% if post.data.author %}
-                <span class="events-grid-author">{{ post.data.author }}</span>
-              {% endif %}
+
+            {# Default face: contained image with padding + title below #}
+            <div class="card-default">
+              <div class="card-img-wrap">
+                {% if post.data.cover_image %}
+                  <img src="{{ post.data.cover_image }}" alt="" class="card-primary-img" />
+                {% endif %}
+              </div>
+              <div class="card-info">
+                <span data-lang="fr" class="language-content events-grid-title">{{ post.data.title_fr or post.data.title }}</span>
+                <span data-lang="en" class="language-content events-grid-title">{{ post.data.title_en or post.data.title }}</span>
+              </div>
             </div>
+
+            {# Hover face: full-bleed image + date & author at bottom #}
+            <div class="card-hover-face">
+              {% if post.data.hover_image %}
+                <img src="{{ post.data.hover_image }}" alt="" class="card-hover-img" />
+              {% elif post.data.cover_image %}
+                <img src="{{ post.data.cover_image }}" alt="" class="card-hover-img" />
+              {% endif %}
+              <div class="card-meta">
+                <time class="events-grid-date" datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate }}</time>
+                {% if post.data.author %}
+                  <span class="events-grid-author">{{ post.data.author }}</span>
+                {% endif %}
+              </div>
+            </div>
+
           </a>
         </li>
       {% endfor %}
