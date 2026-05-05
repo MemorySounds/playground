@@ -5,10 +5,10 @@ title: Événements — PLAYGROUND
 <div class="news-listing">
 
   <div id="content-fr" class="language-content">
-    <h2 class="page-heading">{{ events_page.heading_fr }}</h2>
+    {{ events_page.heading_fr | markdownify | safe }}
   </div>
   <div id="content-en" class="language-content">
-    <h2 class="page-heading">{{ events_page.heading_en }}</h2>
+    {{ events_page.heading_en | markdownify | safe }}
   </div>
 
   {% if collections.events.length %}

@@ -1,2 +1,6 @@
-heading_fr: Événements
-heading_en: Events
+heading_fr: |
+  # Événements
+  Bienvenue sur la page des événements ! Ajoutez ici du texte en **markdown** pour une intro, une description, etc.
+heading_en: |
+  # Events
+  Welcome to the events page! Add any text you want here, using **markdown** for formatting, links, etc.
