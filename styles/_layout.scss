@@ -1,0 +1,101 @@
+@use 'variables' as *;
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+h2 {
+  padding: 50px 0 0;
+}
+hr {
+  margin: 50px 0;
+}
+.first-section {
+  padding: 0;
+}
+
+.language-content {
+  .greeting-message,
+  .greeting-message-fr {
+    margin-bottom: 75px;
+  }
+}
+
+.constitution {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0;
+}
+
+.playground {
+  font-style: italic;
+  font-weight: 600;
+}
+
+#content-en {
+  display: none;
+}
+
+.main-content {
+  position: relative;
+  text-align: justify;
+  // top: 100vh;
+  left: 0;
+  width: 100vw;
+  min-height: 100vh;
+  overflow-y: auto;
+  z-index: 1;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 6rem 1.5rem;
+  // Add space for audio menu on desktop
+  padding-right: calc(1.5rem + 80px);
+  box-sizing: border-box;
+  overflow-x: hidden;
+  background: $white;
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+
+  .main-menu-toggle {
+    padding: 0;
+    top: 1rem;
+    right: 1rem;
+  }
+
+  .main-content {
+    margin-top: 50px;
+    padding: 0 40px 20px 20px;
+  }
+
+  nav ul li {
+    display: block;
+    margin: 10px 0;
+  }
+  nav ul li a {
+    display: block;
+    text-align: center;
+  }
+}
+
+// Events page: expand main-content to full width minus audio menu
+.main-content:has(.events-grid) {
+  max-width: none;
+  width: auto;
+  margin-left: 0;
+  margin-right: 0;
+  padding: 2rem 80px 0 0;
+  text-align: left;
+}
+
+@media (max-width: 768px) {
+  .main-content:has(.events-grid) {
+    padding: 1.5rem 0 0;
+  }
+}

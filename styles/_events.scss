@@ -1,0 +1,139 @@
+@use 'variables' as *;
+
+.news-listing {
+  .page-heading {
+    padding: 0 1.5rem 1rem;
+  }
+}
+
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  padding: 0;
+  margin: 0;
+  // Shared-border technique: container provides top+left, items provide right+bottom
+  border-top: 1px solid $black;
+  border-left: 1px solid $black;
+}
+
+.events-grid-item {
+  list-style: none;
+  border-right: 1px solid $black;
+  border-bottom: 1px solid $black;
+}
+
+.events-grid-card {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  aspect-ratio: 1 / 1;
+  background: $white;
+
+  // ── Default face (contained image + title) ──────────────────
+  .card-default {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    background: $white;
+    opacity: 1;
+    transition: opacity 0.4s ease;
+  }
+
+  .card-img-wrap {
+    flex: 1;
+    padding: 1.5rem 1.5rem 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+
+    .card-primary-img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+  }
+
+  .card-info {
+    padding: 0.5rem 1.5rem 1.25rem;
+    text-align: center;
+  }
+
+  // ── Hover face (image fills top, solid white meta box at bottom) ──────
+  .card-hover-face {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    display: flex;
+    flex-direction: column;
+
+    .card-hover-img {
+      flex: 1;
+      width: 100%;
+      min-height: 0;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .card-meta {
+      flex-shrink: 0;
+      width: 100%;
+      padding: 0.75rem 1.5rem;
+      background: $white;
+      border-top: 1px solid $black;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.2rem;
+      box-sizing: border-box;
+    }
+  }
+
+  &:hover {
+    .card-default {
+      opacity: 0;
+    }
+    .card-hover-face {
+      opacity: 1;
+    }
+  }
+}
+
+.events-grid-title {
+  font-weight: 300;
+  font-size: 0.95rem;
+  line-height: 1.3;
+  color: $black;
+}
+
+.events-grid-date,
+.events-grid-author {
+  font-size: 0.75rem;
+  color: $dark-grey;
+}
+
+@media (max-width: 900px) {
+  .events-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.post-cover {
+  width: 100%;
+  margin-bottom: 2rem;
+
+  img {
+    display: block;
+    width: 100%;
+    max-height: 60vh;
+    object-fit: cover;
+    object-position: center;
+  }
+}

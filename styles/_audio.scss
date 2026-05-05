@@ -1,0 +1,225 @@
+@use 'variables' as *;
+
+.right-audio-menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 80px;
+  height: 100vh;
+  height: 100dvh;
+  background: $audio-bg;
+  border-left: 1.5px solid $dark-grey;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 2rem 0;
+  box-sizing: border-box;
+  transition: none;
+}
+
+body.ready .right-audio-menu {
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.audio-menu-toggle {
+  position: fixed;
+  top: 50%;
+  right: 0.6rem;
+  transform: translateY(-50%);
+  z-index: 9;
+  background: transparent;
+  border: none;
+  width: 24px;
+  height: 50px;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 10px;
+
+  &:hover {
+    transform: translateY(-50%) scale(1.1);
+  }
+
+  span {
+    width: 5px;
+    height: 5px;
+    background: $black;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0.8;
+  }
+
+  &:hover span {
+    opacity: 1;
+    background: $mid-grey;
+  }
+
+  &.open {
+    span:nth-child(1) {
+      transform: translateX(5px);
+    }
+    span:nth-child(3) {
+      transform: translateX(5px);
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .right-audio-menu {
+    width: 60px;
+    transform: translateX(100%);
+    &.open {
+      transform: translateX(0);
+    }
+  }
+
+  .audio-menu-toggle {
+    color: $black;
+    display: flex;
+    &.open {
+      right: calc(60px + 1rem);
+    }
+  }
+}
+
+@media (min-width: 769px) {
+  .audio-menu-toggle {
+    display: none;
+  }
+}
+
+.audio-player {
+  height: auto;
+  width: 100%;
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.time-display {
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: $dark-grey;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 0.5px;
+  text-align: center;
+  min-width: 40px;
+}
+
+.audio-progress {
+  position: absolute;
+  bottom: 280px;
+  right: -112px;
+  width: 300px;
+  height: 16px;
+  transform: rotate(-90deg);
+  background: transparent;
+  border: none;
+  outline: none;
+  opacity: 1;
+  visibility: visible;
+  transition: none;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  touch-action: pan-x;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+
+  &:focus {
+    outline: none;
+    box-shadow: none;
+    background: transparent;
+  }
+
+  &::-webkit-slider-runnable-track {
+    height: 2px;
+    background: $dark-grey;
+    border-radius: 0;
+  }
+  &::-moz-range-track {
+    height: 2px;
+    background: $dark-grey;
+    border-radius: 0;
+  }
+  &::-ms-fill-lower,
+  &::-ms-fill-upper {
+    background: $dark-grey;
+    border-radius: 0;
+  }
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    background: $dark-grey;
+    border-radius: 50%;
+    border: none;
+    margin-top: -5px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  &::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    background: $dark-grey;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  &::-ms-thumb {
+    width: 12px;
+    height: 12px;
+    background: $dark-grey;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  &:focus::-webkit-slider-thumb,
+  &:active::-webkit-slider-thumb,
+  &:focus::-moz-range-thumb,
+  &:active::-moz-range-thumb {
+    background: $dark-grey;
+  }
+
+  &::-moz-focus-outer {
+    border: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .audio-progress {
+    right: -122px;
+    height: 20px;
+    touch-action: none;
+  }
+}
+
+.audio-btn {
+  background: $black !important;
+  opacity: 50%;
+  color: $white !important;
+  border: 1px solid $black !important;
+  border-radius: 0 !important;
+  padding: 6px;
+  font-size: 14px !important;
+  cursor: pointer !important;
+  transition: background 0.2s !important;
+
+  &:hover {
+    background: $mid-grey !important;
+  }
+}
