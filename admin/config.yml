@@ -68,10 +68,10 @@ collections:
         fields:
           - label: 'Titre de la page (FR)'
             name: heading_fr
-            widget: string
+            widget: markdown
           - label: 'Page title (EN)'
             name: heading_en
-            widget: string
+            widget: markdown
 
       - name: archive
         label: Archive
