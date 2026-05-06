@@ -134,7 +134,7 @@ body {
   position: sticky;
   top: 0;
   z-index: 5;
-  width: calc(100vw - 95px); // stops exactly at the audio panel's left border
+  width: calc(100vw - 80px); // stops exactly at the audio panel's left border
 
   ul {
     list-style: none;
