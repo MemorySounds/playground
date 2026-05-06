@@ -124,7 +124,7 @@ body.nav-open {
   position: sticky;
   top: 0;
   z-index: 5;
-  width: calc(100vw - 95px);
+  width: calc(100vw - 80px);
 }
 .main-nav ul {
   list-style: none;
@@ -613,7 +613,7 @@ body.ready .right-audio-menu {
 
 @media (max-width: 900px) {
   .events-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(1, 1fr);
   }
 }
 .post-cover {
