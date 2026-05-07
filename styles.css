@@ -21,6 +21,7 @@ body.nav-open {
   position: relative;
   width: 100vw;
   height: 100vh;
+  height: 100svh;
   overflow: hidden;
   z-index: 10;
 }
@@ -30,6 +31,7 @@ body.nav-open {
   top: 0;
   left: 0;
   height: 100vh;
+  height: 100svh;
   width: 100vw;
   z-index: 10;
   object-fit: cover;
@@ -48,6 +50,7 @@ body.nav-open {
   left: 0;
   width: 100vw;
   height: 100vh;
+  height: 100svh;
   z-index: 10;
 }
 .main-header h1 {
@@ -169,6 +172,7 @@ body.nav-open {
     left: 0;
     width: 100vw;
     height: 100vh;
+    height: 100svh;
     box-sizing: border-box;
     background-color: #fff;
     transform: translateX(100vw);
@@ -245,6 +249,7 @@ hr {
   left: 0;
   width: 100vw;
   min-height: 100vh;
+  min-height: 100dvh;
   overflow-y: auto;
   z-index: 1;
   max-width: 700px;
