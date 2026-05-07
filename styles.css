@@ -11,6 +11,7 @@ body {
   padding: 0;
   margin: 0;
   overflow-x: hidden;
+  touch-action: pan-y;
 }
 body.nav-open {
   overflow: hidden;
@@ -160,9 +161,21 @@ body.nav-open {
   .main-header h1 {
     margin-bottom: 0.3rem;
   }
+  #swipe-edge-zone {
+    display: block;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 24px;
+    height: 100%;
+    z-index: 50;
+    touch-action: none;
+  }
   .main-menu-toggle {
     display: flex;
-    padding: 0 50px;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0 40px;
   }
   .main-nav {
     position: fixed;
