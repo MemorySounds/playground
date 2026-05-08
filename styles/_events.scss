@@ -151,3 +151,40 @@
     object-position: center;
   }
 }
+
+.post-footer {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid $black;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: $black;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border: 1px solid $black;
+  padding: 0.5rem 1rem;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+
+  .back-arrow {
+    display: inline-block;
+    transition: transform 0.2s ease;
+  }
+
+  &:hover {
+    background: $black;
+    color: $white;
+
+    .back-arrow {
+      transform: translateX(-4px);
+    }
+  }
+}
