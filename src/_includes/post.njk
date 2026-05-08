@@ -10,10 +10,10 @@ layout: base.njk
   {% endif %}
 
   <header class="post-header">
-    <div id="content-fr" class="language-content">
+    <div data-lang="fr" class="language-content">
       <h2 class="post-title">{{ title_fr or title }}</h2>
     </div>
-    <div id="content-en" class="language-content">
+    <div data-lang="en" class="language-content">
       <h2 class="post-title">{{ title_en or title }}</h2>
     </div>
     <div class="post-meta">
@@ -22,10 +22,10 @@ layout: base.njk
     </div>
   </header>
 
-  <div id="content-fr" class="language-content post-body">
+  <div data-lang="fr" class="language-content post-body">
     {{ body_fr | markdownify | safe }}
   </div>
-  <div id="content-en" class="language-content post-body">
+  <div data-lang="en" class="language-content post-body">
     {{ body_en | markdownify | safe }}
   </div>
 

@@ -15,18 +15,19 @@ title: Événements — PLAYGROUND
     <ul class="events-grid">
       {% for post in collections.events %}
         <li class="events-grid-item">
-          <a href="{{ post.url }}" data-nav-link class="events-grid-card">
+          <a href="{{ post.url }}" data-nav-link class="events-grid-card{% if not post.data.cover_image %} no-cover{% endif %}">
 
             {# Default face: contained image with padding + title below #}
             <div class="card-default">
+              <time class="card-mobile-date" datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate }}</time>
               <div class="card-img-wrap">
                 {% if post.data.cover_image %}
                   <img src="{{ post.data.cover_image }}" alt="" class="card-primary-img" />
                 {% endif %}
               </div>
               <div class="card-info">
-                <span data-lang="fr" class="language-content events-grid-title">{{ post.data.title_fr or post.data.title }}</span>
-                <span data-lang="en" class="language-content events-grid-title">{{ post.data.title_en or post.data.title }}</span>
+                <span data-lang="fr" class="language-content events-grid-title">{{ (post.data.title_fr or post.data.title) | truncate(60) }}</span>
+                <span data-lang="en" class="language-content events-grid-title">{{ (post.data.title_en or post.data.title) | truncate(60) }}</span>
               </div>
             </div>
 
@@ -36,6 +37,8 @@ title: Événements — PLAYGROUND
                 <img src="{{ post.data.hover_image }}" alt="" class="card-hover-img" />
               {% elif post.data.cover_image %}
                 <img src="{{ post.data.cover_image }}" alt="" class="card-hover-img" />
+              {% else %}
+                <img src="/assets/images/red.jpg" alt="" class="card-hover-img" />
               {% endif %}
               <div class="card-meta">
                 <time class="events-grid-date" datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate }}</time>

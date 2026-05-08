@@ -10,7 +10,7 @@
     max-width: 700px;
     margin-left: auto;
     margin-right: auto;
-    padding: 0 1.5rem 1.5rem;
+    padding: 0 1.5rem 0.5rem;
     box-sizing: border-box;
   }
 }
@@ -73,8 +73,10 @@
   }
 
   .card-info {
+    flex-shrink: 0;
     padding: 0.5rem 1.5rem 1.25rem;
     text-align: center;
+    overflow: hidden;
   }
 
   // ── Hover face (image fills top, solid white meta box at bottom) ──────
@@ -108,6 +110,21 @@
       gap: 0.2rem;
       box-sizing: border-box;
     }
+
+    // ── No hover/cover image: push meta to the bottom ──
+    &.no-hover-img {
+      justify-content: flex-end;
+    }
+  }
+
+  // ── No cover image: hide empty img wrapper, center the title ──
+  &.no-cover {
+    .card-img-wrap {
+      display: none;
+    }
+    .card-default {
+      justify-content: center;
+    }
   }
 
   &:hover {
@@ -122,9 +139,16 @@
 
 .events-grid-title {
   font-weight: 300;
-  font-size: 0.95rem;
+  font-size: clamp(0.75rem, 1.5vw, 0.95rem);
   line-height: 1.3;
   color: $black;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
 }
 
 .events-grid-date,
@@ -133,9 +157,38 @@
   color: $dark-grey;
 }
 
-@media (max-width: 900px) {
+.card-mobile-date {
+  display: block;
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  font-size: 0.7rem;
+  color: $dark-grey;
+  z-index: 1;
+}
+
+@media (max-width: 768px) {
   .events-grid {
     grid-template-columns: repeat(1, 1fr);
+  }
+
+  .events-grid-card.no-cover {
+    .card-img-wrap {
+      display: none;
+    }
+
+    .card-default {
+      justify-content: center;
+    }
+
+    .card-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
   }
 }
 
