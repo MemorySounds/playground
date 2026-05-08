@@ -1,6 +1,6 @@
 # Playground Sessions
 
-A simple indie-website for an art experiment collective, which reolve around sessions called PLAYGROUND.
+A simple indie-website for avant-garde happenings.
 Built with Eleventy (static site generator), Nunjucks templates, SCSS, and vanilla JS.
 
 Live: https://playyground.art/
