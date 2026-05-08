@@ -1,58 +1,52 @@
 # Playground Sessions
 
-A very basic website (vanilla JS, HTML, CSS) to host the content of the PLAYGROUND sessions. It's an evolving project with plenty of experimentation, so please expect short-cuts; the use-case isn't very formal so does it need to be very strict.
+A simple indie-website for an art experiment collective, which reolve around sessions called PLAYGROUND.
+Built with Eleventy (static site generator), Nunjucks templates, SCSS, and vanilla JS.
 
-Check it here: https://playyground.art/
+Live: https://playyground.art/
 
-## How to Develop Locally
+## How It Works
 
-1. **Clone the Repository**
+- **Content** lives in `src/_data/*.yml` (pages) and `src/events/*.md` (event posts).
+- **Templates** are in `src/_includes/` (Nunjucks). Eleventy compiles everything into `_site/`.
+- **Styles** are written in SCSS under `styles/` and compiled to `styles.css`.
+- **Navigation** is a hash-based SPA — pages are loaded dynamically via `scripts/spa.js` without full page reloads.
+- **Deployment** is automatic — pushing to `main` triggers a GitHub Actions build and deploys to GitHub Pages.
 
-```bash
- git clone https://github.com/your-username/playground.git
- cd playground
-```
-
-2. **Run a Local Server**
-
-To play around locally, you can use Python's built-in HTTP server. Run the following command in your terminal:
+## Local Development
 
 ```bash
- python3 -m http.server
+git clone https://github.com/MemorySounds/playground.git
+cd playground
+npm install
+npm run dev
 ```
 
-This will start a local server at http://localhost:8000. Open this URL in your web browser to see the website.
+`npm run dev` watches SCSS for changes and runs the Eleventy dev server simultaneously. The site is available at `http://localhost:8080`.
 
-3. **Pick Up an Issue**
+Other useful commands:
 
-Feel free to pick up an issue from the issues on GitHub. Contributions are welcome!
-
-## Contributing
-
-After setting up a local environment.
-
-1. **Create a new Branch**
-
-```
-git checkout -b feature-branch
+```bash
+npm run build        # full production build (CSS + Eleventy)
+npm run build:css    # compile SCSS only
+npm run build:11ty   # run Eleventy only
 ```
 
-This project isn't following any strict naming conventions, it's a very small project, so just make it something relevant to what the feature will be about. It can be useful, if the branch relates to an Github issue, to reference that issue + the number of the issue in the branch name.
-
-e.g. `1-language-switch`
-
-Code your changes.
-
-2. **Commit your changes**
+## Project Structure
 
 ```
-git commit -m 'Add some feature'
+src/                  # source templates and content
+  _data/              # page content as YAML (editable via CMS)
+  _includes/          # Nunjucks base and post templates
+  events/             # event posts as Markdown (editable via CMS)
+  admin/              # Sveltia CMS interface and config
+styles/               # SCSS source files
+scripts/              # vanilla JS (SPA routing, audio player)
+assets/               # images, audio, video
+_site/                # compiled output (do not edit directly)
 ```
 
-3. **Push to the Branch**
+## CMS — Content Management
 
-```
-git push origin feature-branch
-```
-
-4. **Open a Pull Request**
+Non-technical editors can manage content via Sveltia CMS.
+Authentication is handled by a Cloudflare Worker (`sveltia-cms-auth`) using a GitHub OAuth App. Saved changes commit directly to `main` and trigger an automatic redeploy.
