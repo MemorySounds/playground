@@ -11,50 +11,112 @@ title: Événements — PLAYGROUND
     {{ events_page.heading_en | markdownify | safe }}
   </div>
 
-  {% if collections.events.length %}
-    <ul class="events-grid">
-      {% for post in collections.events %}
-        <li class="events-grid-item">
-          <a href="{{ post.url }}" data-nav-link class="events-grid-card{% if not post.data.cover_image %} no-cover{% endif %}">
+  {# ── Upcoming events ─────────────────────────────────────────────── #}
+  <div class="events-section">
+    <div class="events-section-heading">
+      <span data-lang="fr" class="language-content">À venir</span>
+      <span data-lang="en" class="language-content">Will Happen</span>
+    </div>
 
-            {# Default face: contained image with padding + title below #}
-            <div class="card-default">
-              <time class="card-mobile-date" datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate }}</time>
-              <div class="card-img-wrap">
-                {% if post.data.cover_image %}
-                  <img src="{{ post.data.cover_image }}" alt="" class="card-primary-img" />
+    {% if collections.upcomingEvents.length %}
+      <ul class="events-grid">
+        {% for post in collections.upcomingEvents %}
+          <li class="events-grid-item">
+            <a href="{{ post.url }}" data-nav-link class="events-grid-card{% if not post.data.cover_image %} no-cover{% endif %}">
+
+              <div class="card-default">
+                <time class="card-mobile-date" datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate }}</time>
+                <div class="card-img-wrap">
+                  {% if post.data.cover_image %}
+                    <img src="{{ post.data.cover_image }}" alt="" class="card-primary-img" />
+                  {% endif %}
+                </div>
+                <div class="card-info">
+                  <span data-lang="fr" class="language-content events-grid-title">{{ (post.data.title_fr or post.data.title) | truncate(60) }}</span>
+                  <span data-lang="en" class="language-content events-grid-title">{{ (post.data.title_en or post.data.title) | truncate(60) }}</span>
+                </div>
+              </div>
+
+              <div class="card-hover-face">
+                {% if post.data.hover_image %}
+                  <img src="{{ post.data.hover_image }}" alt="" class="card-hover-img" />
+                {% elif post.data.cover_image %}
+                  <img src="{{ post.data.cover_image }}" alt="" class="card-hover-img" />
+                {% else %}
+                  <img src="/assets/images/red.jpg" alt="" class="card-hover-img" />
                 {% endif %}
+                <div class="card-meta">
+                  <time class="events-grid-date" datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate }}</time>
+                  {% if post.data.author %}
+                    <span class="events-grid-author">{{ post.data.author }}</span>
+                  {% endif %}
+                </div>
               </div>
-              <div class="card-info">
-                <span data-lang="fr" class="language-content events-grid-title">{{ (post.data.title_fr or post.data.title) | truncate(60) }}</span>
-                <span data-lang="en" class="language-content events-grid-title">{{ (post.data.title_en or post.data.title) | truncate(60) }}</span>
-              </div>
-            </div>
 
-            {# Hover face: full-bleed image + date & author at bottom #}
-            <div class="card-hover-face">
-              {% if post.data.hover_image %}
-                <img src="{{ post.data.hover_image }}" alt="" class="card-hover-img" />
-              {% elif post.data.cover_image %}
-                <img src="{{ post.data.cover_image }}" alt="" class="card-hover-img" />
-              {% else %}
-                <img src="/assets/images/red.jpg" alt="" class="card-hover-img" />
-              {% endif %}
-              <div class="card-meta">
-                <time class="events-grid-date" datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate }}</time>
-                {% if post.data.author %}
-                  <span class="events-grid-author">{{ post.data.author }}</span>
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <div class="events-empty">
+        <span data-lang="fr" class="language-content"><em>Aucun événement à venir.</em></span>
+        <span data-lang="en" class="language-content"><em>No upcoming happenings.</em></span>
+      </div>
+    {% endif %}
+  </div>
+
+  {# ── Past events ──────────────────────────────────────────────────── #}
+  <div class="events-section events-section--past">
+    <div class="events-section-heading">
+      <span data-lang="fr" class="language-content">Passés</span>
+      <span data-lang="en" class="language-content">Happened</span>
+    </div>
+
+    {% if collections.pastEvents.length %}
+      <ul class="events-grid">
+        {% for post in collections.pastEvents %}
+          <li class="events-grid-item">
+            <a href="{{ post.url }}" data-nav-link class="events-grid-card{% if not post.data.cover_image %} no-cover{% endif %}">
+
+              <div class="card-default">
+                <time class="card-mobile-date" datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate }}</time>
+                <div class="card-img-wrap">
+                  {% if post.data.cover_image %}
+                    <img src="{{ post.data.cover_image }}" alt="" class="card-primary-img" />
+                  {% endif %}
+                </div>
+                <div class="card-info">
+                  <span data-lang="fr" class="language-content events-grid-title">{{ (post.data.title_fr or post.data.title) | truncate(60) }}</span>
+                  <span data-lang="en" class="language-content events-grid-title">{{ (post.data.title_en or post.data.title) | truncate(60) }}</span>
+                </div>
+              </div>
+
+              <div class="card-hover-face">
+                {% if post.data.hover_image %}
+                  <img src="{{ post.data.hover_image }}" alt="" class="card-hover-img" />
+                {% elif post.data.cover_image %}
+                  <img src="{{ post.data.cover_image }}" alt="" class="card-hover-img" />
+                {% else %}
+                  <img src="/assets/images/red.jpg" alt="" class="card-hover-img" />
                 {% endif %}
+                <div class="card-meta">
+                  <time class="events-grid-date" datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate }}</time>
+                  {% if post.data.author %}
+                    <span class="events-grid-author">{{ post.data.author }}</span>
+                  {% endif %}
+                </div>
               </div>
-            </div>
 
-          </a>
-        </li>
-      {% endfor %}
-    </ul>
-  {% else %}
-    <div id="content-fr" class="language-content"><p><em>Aucun événement pour le moment.</em></p></div>
-    <div id="content-en" class="language-content"><p><em>No events yet.</em></p></div>
-  {% endif %}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <div class="events-empty">
+        <span data-lang="fr" class="language-content"><em>Aucun événement passé.</em></span>
+        <span data-lang="en" class="language-content"><em>No past events.</em></span>
+      </div>
+    {% endif %}
+  </div>
 
 </div>

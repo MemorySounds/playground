@@ -12,6 +12,28 @@ module.exports = function (eleventyConfig) {
     collectionApi.getFilteredByGlob('src/events/*.md').reverse(),
   );
 
+  // Upcoming events: date >= today (includes today), sorted soonest first
+  eleventyConfig.addCollection('upcomingEvents', (collectionApi) => {
+    const todayStr = new Date().toISOString().split('T')[0];
+    return collectionApi
+      .getFilteredByGlob('src/events/*.md')
+      .filter(
+        (post) => new Date(post.date).toISOString().split('T')[0] >= todayStr,
+      )
+      .sort((a, b) => new Date(a.date) - new Date(b.date));
+  });
+
+  // Past events: date < today, sorted most recent first
+  eleventyConfig.addCollection('pastEvents', (collectionApi) => {
+    const todayStr = new Date().toISOString().split('T')[0];
+    return collectionApi
+      .getFilteredByGlob('src/events/*.md')
+      .filter(
+        (post) => new Date(post.date).toISOString().split('T')[0] < todayStr,
+      )
+      .reverse();
+  });
+
   // Render markdown strings from YAML data in templates: {{ value | markdownify }}
   eleventyConfig.addFilter('markdownify', (str) => md.render(str ?? ''));
 
