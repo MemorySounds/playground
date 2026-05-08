@@ -1,162 +1,138 @@
-const routes = {
-  '#/': 'pages/home.html',
-  '#/presentation': 'pages/presentation.html',
-  '#/references': 'pages/references.html',
-  '#/archive': 'pages/archive.html',
-  '#/contact': 'pages/contact.html',
-};
-
-async function loadPage(hash) {
-  const file = routes[hash] || routes['#/'];
-  console.log(file);
-  const html = await fetch(file).then((res) => res.text());
-  console.log(html);
-  document.getElementById('app').innerHTML = html;
-  setupLanguageToggle();
-}
-
-function navigate(event) {
-  if (event.target.matches('[data-link]')) {
-    event.preventDefault();
-    const url = event.target.getAttribute('href');
-    location.hash = url;
-  }
-}
-
-window.addEventListener('hashchange', () => loadPage(location.hash));
-document.addEventListener('DOMContentLoaded', () => {
-  window.scrollTo(0, 0);
-  document.body.classList.add('ready');
-  document.body.addEventListener('click', navigate);
-  loadPage(location.hash || '#/');
-});
-
-// --- Language toggle logic ---
-function setupLanguageToggle() {
-  const languageToggle = document.getElementById('language-toggle');
-  const contentFr = document.getElementById('content-fr');
-  const contentEn = document.getElementById('content-en');
-
-  if (languageToggle && contentFr && contentEn) {
-    languageToggle.onclick = function () {
-      if (contentFr.style.display === 'none') {
-        contentFr.style.display = 'block';
-        contentEn.style.display = 'none';
-        languageToggle.textContent = 'ENGLISH';
-        localStorage.setItem('language', 'fr');
-      } else {
-        contentFr.style.display = 'none';
-        contentEn.style.display = 'block';
-        languageToggle.textContent = 'FRANÇAIS';
-        localStorage.setItem('language', 'en');
-      }
-    };
-
-    // Set initial state based on localStorage
-    const savedLanguage = localStorage.getItem('language');
-    if (savedLanguage === 'en') {
-      contentFr.style.display = 'none';
-      contentEn.style.display = 'block';
-      languageToggle.textContent = 'FRANÇAIS';
-    } else {
-      contentFr.style.display = 'block';
-      contentEn.style.display = 'none';
-      languageToggle.textContent = 'ENGLISH';
-    }
-  }
-}
-
-// Menu toggle functionality
+// ── Menu toggle ──────────────────────────────────────────────────────────
 const mainMenuToggle = document.getElementById('main-menu-toggle');
 const audioMenuToggle = document.getElementById('audio-menu-toggle');
-const mainHeader = document.querySelector('.main-header');
+const mainNav = document.querySelector('.main-nav');
 const rightAudioMenu = document.querySelector('.right-audio-menu');
+const languageToggle = document.getElementById('language-toggle');
 
-// Main navigation menu toggle (expands header downward)
+function closeMenu() {
+  mainNav.classList.remove('open');
+  mainMenuToggle.classList.remove('open');
+  document.body.classList.remove('nav-open');
+}
+
 mainMenuToggle.addEventListener('click', () => {
-  mainHeader.classList.toggle('expanded');
-  document.body.classList.toggle(
-    'nav-open',
-    mainHeader.classList.contains('expanded'),
-  );
-  mainMenuToggle.classList.toggle(
-    'open',
-    mainHeader.classList.contains('expanded'),
-  );
+  mainNav.classList.toggle('open');
+  const isOpen = mainNav.classList.contains('open');
+  document.body.classList.toggle('nav-open', isOpen);
+  mainMenuToggle.classList.toggle('open', isOpen);
 });
 
-// Close main menu when clicking nav links
-document.addEventListener('click', (e) => {
-  if (e.target.matches('[data-link]') || e.target.matches('#language-toggle')) {
-    mainHeader.classList.remove('expanded');
-    mainMenuToggle.classList.remove('open');
-    document.body.classList.remove('nav-open');
-
-    // Scroll to top of content + offset
-    setTimeout(() => {
-      const app = document.getElementById('playground-title');
-      const offset = 40;
-      const top = app.getBoundingClientRect().top + window.scrollY - offset;
-      window.scrollTo({ top, behavior: 'smooth' });
-    }, 0);
-  }
-});
-
-// Close main menu when clicking outside
-document.addEventListener('click', (e) => {
-  if (!mainHeader.contains(e.target)) {
-    mainHeader.classList.remove('expanded');
-    mainMenuToggle.classList.remove('open');
-    document.body.classList.remove('nav-open');
-  }
-});
-
-// Close main menu when clicking outside nav links (dead space or outside menu)
-document.addEventListener('click', (e) => {
-  const navMenu = document.querySelector('.main-nav');
-  const navToggle = document.getElementById('main-menu-toggle');
-  // If menu is open
-  if (document.body.classList.contains('nav-open')) {
-    console.log(e.target);
-    // If click is outside navMenu and toggle, close menu
-    if (!navMenu.contains(e.target) && !navToggle.contains(e.target)) {
-      mainHeader.classList.remove('expanded');
-      mainMenuToggle.classList.remove('open');
-      document.body.classList.remove('nav-open');
-    }
-    // If click is inside navMenu but NOT on a nav link, close menu
-    else if (navMenu.contains(e.target) && !e.target.matches('[data-link]')) {
-      mainHeader.classList.remove('expanded');
-      mainMenuToggle.classList.remove('open');
-      document.body.classList.remove('nav-open');
-    }
-  }
-});
-
-// Audio menu toggle (mobile only)
 if (audioMenuToggle) {
   audioMenuToggle.addEventListener('click', () => {
-    const isOpen = rightAudioMenu.classList.contains('open');
     rightAudioMenu.classList.toggle('open');
     audioMenuToggle.classList.toggle('open');
-
-    // Prevent body scrolling when audio menu is open
-    if (rightAudioMenu.classList.contains('open')) {
-      document.body.classList.add('audio-menu-open');
-    } else {
-      document.body.classList.remove('audio-menu-open');
-    }
   });
+}
 
-  // Close audio menu when clicking outside
-  document.addEventListener('click', (e) => {
-    if (
-      !rightAudioMenu.contains(e.target) &&
-      !audioMenuToggle.contains(e.target)
+// Close menu when a nav link is clicked
+document.addEventListener('click', (e) => {
+  if (
+    e.target.matches('[data-nav-link]') ||
+    e.target.matches('#language-toggle')
+  ) {
+    closeMenu();
+  }
+});
+
+// Close menu when clicking outside it
+document.addEventListener('click', (e) => {
+  if (document.body.classList.contains('nav-open')) {
+    if (!mainNav.contains(e.target) && !mainMenuToggle.contains(e.target)) {
+      closeMenu();
+    } else if (
+      mainNav.contains(e.target) &&
+      !e.target.matches('[data-nav-link]')
     ) {
-      rightAudioMenu.classList.remove('open');
-      audioMenuToggle.classList.remove('open');
-      document.body.classList.remove('audio-menu-open');
+      closeMenu();
+    }
+  }
+});
+
+// ── Language toggle ──────────────────────────────────────────────────────
+// Handles two patterns:
+//  1. id="content-fr" / id="content-en"  — single block per page (most pages)
+//  2. data-lang="fr" / data-lang="en"    — repeated elements (events cards, etc.)
+function setLanguage(lang) {
+  // Pattern 1 — single blocks
+  const contentFr = document.getElementById('content-fr');
+  const contentEn = document.getElementById('content-en');
+  if (contentFr) contentFr.style.display = lang === 'fr' ? 'block' : 'none';
+  if (contentEn) contentEn.style.display = lang === 'en' ? 'block' : 'none';
+  // Pattern 2 — repeated blocks (querySelectorAll handles any number)
+  document.querySelectorAll('[data-lang]').forEach((el) => {
+    el.style.display = el.dataset.lang === lang ? 'block' : 'none';
+  });
+  if (languageToggle)
+    languageToggle.textContent = lang === 'en' ? 'FRANÇAIS' : 'ENGLISH';
+  localStorage.setItem('language', lang);
+}
+
+setLanguage(localStorage.getItem('language') || 'fr');
+initArchiveGate();
+
+if (languageToggle) {
+  languageToggle.addEventListener('click', () => {
+    setLanguage(
+      (localStorage.getItem('language') || 'fr') === 'fr' ? 'en' : 'fr',
+    );
+  });
+}
+
+// ── Archive password gate ────────────────────────────────────────────────
+// Inline scripts inside swapped innerHTML don't execute, so the gate logic
+// lives here in the shell and is re-initialised after every navigation.
+function initArchiveGate() {
+  const input = document.getElementById('password-input');
+  if (!input) return;
+  const gate = document.getElementById('archive-gate');
+  const content = document.getElementById('archive-content');
+  const error = document.getElementById('password-error');
+  input.addEventListener('keydown', (e) => {
+    if (e.key !== 'Enter') return;
+    if (input.value === gate.dataset.password) {
+      gate.style.display = 'none';
+      content.style.display = 'block';
+    } else {
+      if (error) error.style.display = 'block';
+      input.value = '';
     }
   });
 }
+
+// ── Fetch navigation (keeps audio alive across pages) ────────────────────
+// Intercepts nav-link clicks, fetches the target, swaps only <main> content,
+// and updates the URL — the audio element in the shell is never destroyed.
+async function navigateTo(url) {
+  try {
+    const res = await fetch(url);
+    if (!res.ok) {
+      window.location.href = url;
+      return;
+    }
+    const doc = new DOMParser().parseFromString(await res.text(), 'text/html');
+    const newMain = doc.querySelector('main.main-content');
+    const currentMain = document.querySelector('main.main-content');
+    if (newMain && currentMain) currentMain.innerHTML = newMain.innerHTML;
+    document.title = doc.title;
+    setLanguage(localStorage.getItem('language') || 'fr');
+    initArchiveGate();
+  } catch (_) {
+    window.location.href = url;
+  }
+}
+
+document.addEventListener('click', (e) => {
+  const link = e.target.closest('[data-nav-link]');
+  if (!link) return;
+  const href = link.getAttribute('href');
+  if (!href || href.startsWith('http') || href.startsWith('//')) return;
+  e.preventDefault();
+  if (href === window.location.pathname) return;
+  history.pushState(null, '', href);
+  navigateTo(href);
+});
+
+window.addEventListener('popstate', () => {
+  navigateTo(window.location.pathname || '/');
+});
