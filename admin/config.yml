@@ -2,6 +2,7 @@ backend:
   name: github
   repo: MemorySounds/playground
   branch: main
+  base_url: https://sveltia-cms-auth.r-sahakyan1.workers.dev
 
 # Media uploaded via the CMS goes here; public URL prefix for generated markdown
 media_folder: assets/images
