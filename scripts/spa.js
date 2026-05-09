@@ -117,6 +117,7 @@ async function navigateTo(url) {
     document.title = doc.title;
     setLanguage(localStorage.getItem('language') || 'fr');
     initArchiveGate();
+    setActiveNavLink();
   } catch (_) {
     window.location.href = url;
   }
@@ -135,4 +136,16 @@ document.addEventListener('click', (e) => {
 
 window.addEventListener('popstate', () => {
   navigateTo(window.location.pathname || '/');
+  setActiveNavLink();
 });
+
+function setActiveNavLink() {
+  const path = window.location.pathname;
+  document.querySelectorAll('[data-nav-link]').forEach((link) => {
+    const href = link.getAttribute('href');
+    const isActive = href === '/' ? path === '/' : path.startsWith(href);
+    link.classList.toggle('active', isActive);
+  });
+}
+
+setActiveNavLink();
