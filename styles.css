@@ -148,7 +148,7 @@ body.nav-open {
   -webkit-tap-highlight-color: transparent;
   letter-spacing: 0.02em;
 }
-.main-nav ul li a:hover {
+.main-nav ul li a:hover, .main-nav ul li a.active {
   background-color: #000;
   color: #fff;
   border-radius: 0;
@@ -211,6 +211,10 @@ body.nav-open {
   .main-nav ul li a:hover {
     background-color: transparent;
     color: #000;
+  }
+  .main-nav ul li a.active {
+    background-color: #000;
+    color: #fff;
   }
   #language-toggle {
     font-size: 0.7rem;
