@@ -100,10 +100,51 @@ function initArchiveGate() {
   });
 }
 
+// ── Click event-handler ────────────────────────────────────────
+const scrollPosition = {};
+
+document.addEventListener('click', (e) => {
+  const link = e.target.closest('[data-nav-link]');
+  if (!link) return;
+
+  // If it's a back link, use browser history so popstate fires and scroll is restored
+  if (link.hasAttribute('data-back')) {
+    e.preventDefault();
+    history.back();
+    return;
+  }
+
+  // save current page's scroll position before leaving
+  scrollPosition[window.location.pathname] = window.scrollY;
+
+  const href = link.getAttribute('href');
+  if (!href || href.startsWith('http') || href.startsWith('//')) return;
+  e.preventDefault();
+  if (href === window.location.pathname) return;
+  history.pushState(null, '', href);
+  navigateTo(href);
+});
+
+window.addEventListener('popstate', () => {
+  navigateTo(window.location.pathname || '/', true);
+  setActiveNavLink();
+});
+
+function setActiveNavLink() {
+  const path = window.location.pathname;
+  document.querySelectorAll('[data-nav-link]').forEach((link) => {
+    const href = link.getAttribute('href');
+    const isActive = href === '/' ? path === '/' : path.startsWith(href);
+    link.classList.toggle('active', isActive);
+  });
+}
+
+setActiveNavLink();
+
 // ── Fetch navigation (keeps audio alive across pages) ────────────────────
 // Intercepts nav-link clicks, fetches the target, swaps only <main> content,
 // and updates the URL — the audio element in the shell is never destroyed.
-async function navigateTo(url) {
+async function navigateTo(url, restoreScroll = false) {
   try {
     const res = await fetch(url);
     if (!res.ok) {
@@ -118,34 +159,18 @@ async function navigateTo(url) {
     setLanguage(localStorage.getItem('language') || 'fr');
     initArchiveGate();
     setActiveNavLink();
+
+    // bring the user to the top of the main-content
+    requestAnimationFrame(() => {
+      if (restoreScroll && scrollPosition[url] != null) {
+        window.scrollTo({ top: scrollPosition[url], behavior: 'instant' });
+      } else {
+        const main = document.querySelector('.main-header');
+        if (main)
+          window.scrollTo({ top: main.offsetHeight, behavior: 'smooth' });
+      }
+    });
   } catch (_) {
     window.location.href = url;
   }
 }
-
-document.addEventListener('click', (e) => {
-  const link = e.target.closest('[data-nav-link]');
-  if (!link) return;
-  const href = link.getAttribute('href');
-  if (!href || href.startsWith('http') || href.startsWith('//')) return;
-  e.preventDefault();
-  if (href === window.location.pathname) return;
-  history.pushState(null, '', href);
-  navigateTo(href);
-});
-
-window.addEventListener('popstate', () => {
-  navigateTo(window.location.pathname || '/');
-  setActiveNavLink();
-});
-
-function setActiveNavLink() {
-  const path = window.location.pathname;
-  document.querySelectorAll('[data-nav-link]').forEach((link) => {
-    const href = link.getAttribute('href');
-    const isActive = href === '/' ? path === '/' : path.startsWith(href);
-    link.classList.toggle('active', isActive);
-  });
-}
-
-setActiveNavLink();
