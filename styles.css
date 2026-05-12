@@ -682,12 +682,12 @@ body.ready .right-audio-menu {
   z-index: 1;
 }
 
-@media (hover: none) {
+@media (hover: none), (max-width: 768px) {
   .events-grid-card .card-hover-face {
     display: none;
   }
-  .events-grid-card .card-mobile-date {
-    display: block;
+  .events-grid-card:hover .card-default {
+    opacity: 1;
   }
 }
 @media (max-width: 768px) {
