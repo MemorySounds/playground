@@ -21,8 +21,7 @@ body.nav-open {
 .video-wrapper {
   position: relative;
   width: 100vw;
-  height: 100vh;
-  height: 100svh;
+  height: calc(var(--vh, 1svh) * 100);
   overflow: hidden;
   z-index: 10;
 }
@@ -31,8 +30,7 @@ body.nav-open {
   position: absolute;
   top: 0;
   left: 0;
-  height: 100vh;
-  height: 100svh;
+  height: calc(var(--vh, 1svh) * 100);
   width: 100vw;
   z-index: 10;
   object-fit: cover;
@@ -50,8 +48,7 @@ body.nav-open {
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
-  height: 100svh;
+  height: calc(var(--vh, 1svh) * 100);
   z-index: 10;
 }
 .main-header h1 {
@@ -184,8 +181,7 @@ body.nav-open {
     top: 0;
     left: 0;
     width: 100vw;
-    height: 100vh;
-    height: 100svh;
+    height: calc(var(--vh, 1svh) * 100);
     box-sizing: border-box;
     background-color: #fff;
     transform: translateX(100vw);
@@ -265,14 +261,13 @@ hr {
   text-align: justify;
   left: 0;
   width: 100vw;
-  min-height: 100vh;
-  min-height: 100svh;
   overflow-y: auto;
   z-index: 1;
   max-width: 700px;
   margin-left: auto;
   margin-right: auto;
   padding: 2.5rem 1.5rem;
+  min-height: calc(var(--vh, 1svh) * 100);
   padding-right: calc(1.5rem + 80px);
   box-sizing: border-box;
   overflow-x: hidden;
@@ -320,8 +315,7 @@ hr {
   top: 0;
   right: 0;
   width: 80px;
-  height: 100vh;
-  height: 100dvh;
+  height: calc(var(--vh, 1svh) * 100);
   background: rgba(255, 255, 255, 0.9);
   border-left: 1.5px solid #111;
   z-index: 2;
