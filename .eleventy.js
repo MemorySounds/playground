@@ -34,6 +34,16 @@ module.exports = function (eleventyConfig) {
       .reverse();
   });
 
+  // Prev/next navigation for event posts (collection is newest-first)
+  eleventyConfig.addFilter('prevEvent', (collection, url) => {
+    const i = collection.findIndex((e) => e.url === url);
+    return i !== -1 && i < collection.length - 1 ? collection[i + 1] : null;
+  });
+  eleventyConfig.addFilter('nextEvent', (collection, url) => {
+    const i = collection.findIndex((e) => e.url === url);
+    return i > 0 ? collection[i - 1] : null;
+  });
+
   // Render markdown strings from YAML data in templates: {{ value | markdownify }}
   eleventyConfig.addFilter('markdownify', (str) => md.render(str ?? ''));
 

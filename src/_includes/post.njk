@@ -21,7 +21,6 @@ layout: base.njk
       {% if author %}<span class="post-author"> — {{ author }}</span>{% endif %}
     </div>
   </header>
-
   <div data-lang="fr" class="language-content post-body">
     {{ body_fr | markdownify | safe }}
   </div>
@@ -29,8 +28,19 @@ layout: base.njk
     {{ body_en | markdownify | safe }}
   </div>
 
+  {% set prevPost = collections.events | prevEvent(page.url) %}
+  {% set nextPost = collections.events | nextEvent(page.url) %}
+
   <footer class="post-footer">
-    <a href="/events/" data-nav-link data-back class="back-link"><span class="back-arrow">←</span> Events</a>
+    <a href="/events/" data-nav-link class="back-link">All Happenings</a>
+    <div class="event-nav-buttons">
+      {% if prevPost %}
+        <a href="{{ prevPost.url }}" data-nav-link class="back-link"><span class="back-arrow">←</span>Previous</a>
+      {% endif %}
+      {% if nextPost %}
+        <a href="{{ nextPost.url }}" data-nav-link class="back-link">Next<span class="back-arrow">→</span></a>
+      {% endif %}
+    </div>
   </footer>
 
 </article>
