@@ -1,3 +1,13 @@
+// ── Stable viewport height (fixes URL-bar jitter on Brave / WKWebView) ──
+function setVH() {
+  document.documentElement.style.setProperty(
+    '--vh',
+    `${window.innerHeight * 0.01}px`,
+  );
+}
+setVH();
+window.addEventListener('orientationchange', setVH);
+
 // ── Menu toggle ──────────────────────────────────────────────────────────
 const mainMenuToggle = document.getElementById('main-menu-toggle');
 const audioMenuToggle = document.getElementById('audio-menu-toggle');

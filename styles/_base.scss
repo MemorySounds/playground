@@ -24,8 +24,7 @@ body {
 .video-wrapper {
   position: relative;
   width: 100vw;
-  height: 100vh;
-  height: 100svh;
+  height: calc(var(--vh, 1svh) * 100);
   overflow: hidden;
   z-index: 10;
 }
@@ -34,8 +33,7 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  height: 100vh;
-  height: 100svh;
+  height: calc(var(--vh, 1svh) * 100);
   width: 100vw;
   z-index: 10;
   object-fit: cover;
@@ -53,8 +51,7 @@ body {
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
-  height: 100svh;
+  height: calc(var(--vh, 1svh) * 100);
   z-index: 10;
 
   h1 {
@@ -204,8 +201,7 @@ body {
     top: 0;
     left: 0;
     width: 100vw;
-    height: 100vh;
-    height: 100svh;
+    height: calc(var(--vh, 1svh) * 100);
     box-sizing: border-box;
     background-color: $white;
     transform: translateX(100vw);

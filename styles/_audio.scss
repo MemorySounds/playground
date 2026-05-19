@@ -5,8 +5,7 @@
   top: 0;
   right: 0;
   width: 80px;
-  height: 100vh;
-  height: 100dvh;
+  height: calc(var(--vh, 1svh) * 100);
   background: $audio-bg;
   border-left: 1.5px solid $dark-grey;
   z-index: 2;
