@@ -676,33 +676,6 @@ body.ready .right-audio-menu {
   z-index: 1;
 }
 
-@media (hover: none), (max-width: 768px) {
-  .events-grid-card .card-hover-face {
-    display: none;
-  }
-  .events-grid-card:hover .card-default {
-    opacity: 1;
-  }
-}
-@media (max-width: 768px) {
-  .events-grid {
-    grid-template-columns: repeat(1, 1fr);
-  }
-  .events-grid-card.no-cover .card-img-wrap {
-    display: none;
-  }
-  .events-grid-card.no-cover .card-default {
-    justify-content: center;
-  }
-  .events-grid-card.no-cover .card-info {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 1.5rem;
-  }
-}
 .post-cover {
   width: 100%;
   margin-bottom: 2rem;
@@ -719,6 +692,14 @@ body.ready .right-audio-menu {
   margin-top: 3rem;
   padding-top: 1.5rem;
   border-top: 1px solid #000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.event-nav-buttons {
+  display: flex;
+  gap: 0.5rem;
 }
 
 .back-link {
@@ -747,6 +728,48 @@ body.ready .right-audio-menu {
   transform: translateX(-4px);
 }
 
+@media (hover: none), (max-width: 768px) {
+  .events-grid-card .card-hover-face {
+    display: none;
+  }
+  .events-grid-card:hover .card-default {
+    opacity: 1;
+  }
+}
+@media (max-width: 768px) {
+  .events-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .events-grid-card.no-cover .card-img-wrap {
+    display: none;
+  }
+  .events-grid-card.no-cover .card-default {
+    justify-content: center;
+  }
+  .events-grid-card.no-cover .card-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+  }
+  .post-footer {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .post-footer .event-nav-buttons {
+    order: 0;
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+  .post-footer > .back-link {
+    order: 1;
+    align-self: center;
+    justify-content: center;
+  }
+}
 .playground-list {
   border: solid;
   padding: 20px;
