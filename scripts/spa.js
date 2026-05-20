@@ -142,7 +142,7 @@ window.addEventListener('popstate', () => {
 
 function setActiveNavLink() {
   const path = window.location.pathname;
-  document.querySelectorAll('[data-nav-link]').forEach((link) => {
+  document.querySelectorAll('.main-nav [data-nav-link]').forEach((link) => {
     const href = link.getAttribute('href');
     const isActive = href === '/' ? path === '/' : path.startsWith(href);
     link.classList.toggle('active', isActive);
