@@ -3,7 +3,7 @@
 A simple indie-website for avant-garde happenings.
 Built with Eleventy (static site generator), Nunjucks templates, SCSS, and vanilla JS.
 
-Live: https://playyground.art/
+Live: https://playyground.xyz/
 
 ## How It Works
 
