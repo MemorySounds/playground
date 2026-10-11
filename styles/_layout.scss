@@ -57,6 +57,24 @@ hr {
   background: $white;
 }
 
+// Fit images in text to the column. :where() keeps specificity at zero so
+// the card and cover image rules still win.
+:where(.main-content) img {
+  max-width: 100%;
+  height: auto;
+}
+
+// Aligned text blocks from the CMS editor.
+.align-left {
+  text-align: left;
+}
+.align-center {
+  text-align: center;
+}
+.align-right {
+  text-align: right;
+}
+
 @media (max-width: 768px) {
   body {
     font-size: 14px;

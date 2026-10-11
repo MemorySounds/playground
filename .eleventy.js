@@ -67,9 +67,10 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ 'styles.css': 'styles.css' });
   eleventyConfig.addPassthroughCopy({ scripts: 'scripts' });
   eleventyConfig.addPassthroughCopy('CNAME');
-  // Copy the CMS config so it's served at /admin/config.yml
+  // Copy the CMS config and preview templates so they're served under /admin/
   eleventyConfig.addPassthroughCopy({
     'src/admin/config.yml': 'admin/config.yml',
+    'src/admin/preview.js': 'admin/preview.js',
   });
   eleventyConfig.addPassthroughCopy({ 'styles.css': 'styles.css' });
 
